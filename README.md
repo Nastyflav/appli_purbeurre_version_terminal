@@ -1,1 +1,1 @@
-# pur_beurre_OC
+# Pur Beurre, l'application
