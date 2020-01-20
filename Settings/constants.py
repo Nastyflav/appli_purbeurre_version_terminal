@@ -9,6 +9,7 @@ DB_HOST = 'localhost'
 DB_USER = 'root'
 DB_PASSWORD = 'Flying14!'
 DB_NAME = 'purbeurre'
+FILENAME = 'db_init.sql'
 
 #API search parameters#
 

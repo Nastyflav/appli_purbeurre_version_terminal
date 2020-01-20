@@ -10,17 +10,26 @@ from Settings.constants import *
 class Database:
     '''Manage all the primary aspects regarding the database as connexion, error issues, data selection'''
     def __init__(self):
+        self.filename = FILENAME
         '''No connexion yet'''
         self.connexion = False
         self.curs = False
 
-    def db_creation(self, file):
+    def db_creation(self):
         '''Create a database in the user's system using instructions in an init MySQL file'''
-        self.curs.execute(DB_CREATION.format(DB_NAME))
+        try:
+            with open(self.filename, 'r') as cmd_file:
+                sql_commands = cmd_file.read()
+                sql_commands = sql_commands.split(';') # Split the file in a list by using ';' as a separator for each SQL command
+            for command in sql_commands:
+                self.curs.execute(command)
+
+        except FileNotFoundError:
+            print("Couldn't open commands file \"" + self.filename + "\"")
 
     def db_connexion(self):
         '''Use mysql.connector to allow access to the chosen database'''
-        self.connexion = con.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database=DB_NAME)
+        self.connexion = con.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD)
         self.curs = self.connexion.cursor(buffered=True)
 
     def products_insert(self, insert, data):
