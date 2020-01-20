@@ -11,10 +11,6 @@ class Interface:
     def __init__(self):
         pass
 
-    def binary_input(self):
-        '''Defining an user input with only two choices'''
-        pass
-
     def products_display(self):
         '''How every product is displayed into the terminal'''
         pass
