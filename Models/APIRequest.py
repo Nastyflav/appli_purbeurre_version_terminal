@@ -5,15 +5,18 @@ and mysql.connector to fill the database'''
 import requests as rq
 import mysql.connector as con
 
-from Settings.constants import API_PAGE_SIZE, API_PAGES_NUMBER, API_CATEGORIES, API_URL_SOURCE
+from Models.Database import Database
+from Settings.constants import API_PAGE_SIZE, API_PAGES_NUMBER, API_CATEGORIES, API_URL_SOURCE, \
+                                DB_PRODUCTS_INSERT
 
 
 class APIRequest:
     '''Class to load a data list from the OFF API products into the database'''
-    def __init__(self):
+    def __init__(self, database):
         '''Define the category products we want'''
         self.categories = API_CATEGORIES
         self.products_list = []
+        self.db = Database()
 
     def data_loading(self):
         '''Make a request to the API and fill the products list'''
@@ -29,18 +32,11 @@ class APIRequest:
 
     def data_recording(self):
         '''Pick precisely each chosen data and record it into the database'''
-        self.mydb = con.connect(host="localhost",user="root",password="Flying14!", database="essai1")
-        self.curseur = self.mydb.cursor()
-        self.insert = 'INSERT INTO products (name, description, barcode, store, nova_groups, url)\
-                                 VALUES (%s, %s, %s, %s, %s, %s)'
+        self.db.db_connexion()
+        self.insert = DB_PRODUCTS_INSERT
 
         for result in self.products_list:
             for element in result['products']:
-                # print(element)
-                # exit(0)
                 self.data = (element['product_name'], element['generic_name_fr'], element['unique_scans_n'], \
                              element['stores'], element['nutrition_grade_fr'], element['url'])
-                self.curseur.execute(self.insert, self.data)
-                
-            self.mydb.commit()
-        self.mydb.close()
+                self.db.products_insert(self.insert, self.data)

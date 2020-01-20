@@ -1,11 +1,13 @@
 from Models.APIRequest import APIRequest
-
+from Models.Database import Database
 
 def main():
 
-    api = APIRequest()
-    api.data_loading()
-    print(api.products_list)
+    db = Database()
+    # api = APIRequest(db)
+    # api.data_loading()
+    # api.data_recording()
+    db.db_connexion
 
 if __name__ == "__main__":
     main()
