@@ -34,8 +34,17 @@ class Database:
         self.curs = self.connexion.cursor(buffered=True)
 
     def database_check_in(self):
-        '''Check if the database is already filled or not'''
+        '''Check if the database already exists'''
+        # if no database name as DB_NAME:
+            # method = None
 
+    def products_check_in(self):
+        '''Check if the database is properly filled'''
+        # if not enough products in the database:
+            # self.database_connexion()
+            # self.api.data_loading()
+            # self.data_recording()
+                
     def data_recording(self, api):
         '''Pick precisely each chosen data and record it into the database'''
         print('Enregistrement des produits...')
@@ -43,9 +52,10 @@ class Database:
         for result in api.products_list:
             for api.categories in result['products']:
                 self.cat_data = (api.categories['categories'])
-                self.curs.execute(self.cat_insert, self.cat_data)
-            self.connexion.commit()
+                print(self.cat_data)
         exit(0)
+            #     self.curs.execute(self.cat_insert, self.cat_data)
+            # self.connexion.commit()
 
         self.products_insert = DB_PRODUCTS_INSERT #Then we add all products
         for result in api.products_list:
@@ -58,17 +68,10 @@ class Database:
         '''Pick the product using its category and then its name'''
         pass
 
-    def substitutes_select(self):
-        '''Show substitutes with higher nutritive grades than the original product'''
-        pass
-
     def save_favorites(self):
         '''Allow the user to save his query into the database'''
-        pass
-
-    def favorites_select(self):
-        '''Print all the previously saved favorites'''
-        pass
+        self.favorites_insert = DB_FAVORITES_INSERT
+        self.fav_data =
 
     def database_closing(self):
         '''Closing the database'''

@@ -9,7 +9,6 @@ DB_HOST = 'localhost'
 DB_USER = 'root'
 DB_PASSWORD = 'Flying14!'
 DB_NAME = 'purbeurre'
-FILENAME = 'db_init.sql'
 
 #API search parameters#
 
@@ -20,7 +19,9 @@ API_URL_SOURCE = 'https://fr.openfoodfacts.org/cgi/search.pl?'
 
 #Database recording parameters#
 
+FILENAME = 'db_init.sql'
 DB_PRODUCTS_INSERT = 'INSERT INTO products (name, description, barcode, store, nova_groups, url)\
-                VALUES (%s, %s, %s, %s, %s, %s)'
-
+                    VALUES (%s, %s, %s, %s, %s, %s)'
 DB_CATEGORIES_INSERT = 'INSERT INTO categories (name) VALUES (%s)'
+DB_FAVORITES_INSERT = 'INSERT IGNORE INTO favorites (substitute_id, original_product_id) \
+                    VALUES (%s, %s)'

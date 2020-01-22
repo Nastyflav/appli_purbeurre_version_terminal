@@ -17,10 +17,11 @@ class LaunchApp(self):
     def regular_start(self):
         '''Start and close the app when the database is already created'''
         print('====PUR BEURRE, l\'application====')
-        # Database connexion
-        # Database check in
-        # If no database
-            # Database creation
+        # self.db.database_check_in()
+            # if method is None
+                # self.first_start()
+        # self.db.products_check_in()
+        # self.db.database connexion() ???
         # continue = True
         # while continue:
             # Selection menu
@@ -36,7 +37,16 @@ class LaunchApp(self):
 
     def first_start(self):
         '''When database is missing or first use of the app'''
-        # Read the db_init.sql file
+        print('====Bienvenue sur Pur Beurre====')
+        print('====Création de votre base de données en cours====')
+        self.database_creation()
+        print('=====Les stocks sont au plus bas !====')
+        print('=====Téléchargement des données====')
+        self.api.data_loading()
+        print('=====Reconstitution des stocks en cours====')
+        self.database_connexion()
+        self.database_recording(api)
+        print('====Votre magasin est désormais opérationnel !')
 
     def app_closing(self):
         '''To close properly the app'''
@@ -51,4 +61,5 @@ class LaunchApp(self):
 
     def favorites_query(self):
         '''If the user wants to take a look at his previous queries'''
-        # self.db.favorites_from_db()
+        print('====Voici vos produits sauvegardés====')
+        self.db.favorites_from_db()

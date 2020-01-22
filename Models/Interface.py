@@ -9,7 +9,7 @@ from Settings.constants import *
 class Interface:
     '''A class to centralize the user's interactions with the terminal'''
     def __init__(self):
-        pass
+        self.database = Database(api)
 
     def products_display(self):
         '''How every product is displayed into the terminal'''
@@ -29,7 +29,9 @@ class Interface:
 
     def substitutes_saving(self):
         '''The user can save his query result'''
-        pass
+        print('====Enregistrement dans vos favoris====')
+        self.database.save_products()
+        print('====Enregistrement terminé====')
 
     def favorites_from_db(self):
         '''The user can directly look at his previous saves'''
