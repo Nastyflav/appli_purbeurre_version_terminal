@@ -13,8 +13,8 @@ FILENAME = 'db_init.sql'
 
 #API search parameters#
 
-API_PAGE_SIZE = 100
-API_PAGES_NUMBER = [1, 2, 3, 4, 5]
+API_PAGE_SIZE = 20
+API_PAGES_NUMBER = [1]
 API_CATEGORIES = ['pâte à tartiner', 'thés', 'fromages blancs', 'jus de fruits', 'confitures de fruits']
 API_URL_SOURCE = 'https://fr.openfoodfacts.org/cgi/search.pl?'
 

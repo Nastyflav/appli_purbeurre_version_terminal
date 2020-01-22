@@ -27,7 +27,7 @@ class Interface:
         '''Select from the DB a list of similar products, with higher grades'''
         pass
 
-    def substitute_saving(self):
+    def substitutes_saving(self):
         '''The user can save his query result'''
         pass
 

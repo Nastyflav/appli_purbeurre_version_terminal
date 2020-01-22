@@ -4,18 +4,20 @@
 
 import mysql.connector as con
 
+from Models.APIRequest import APIRequest
 from Settings.constants import *
 
 
 class Database:
     '''Manage all the primary aspects regarding the database as connexion, error issues, data selection'''
-    def __init__(self):
+    def __init__(self, api):
         self.filename = FILENAME
+        self.api = api
         '''No connexion yet'''
         self.connexion = False
         self.curs = False
 
-    def db_creation(self):
+    def database_creation(self):
         '''Create a database in the user's system using instructions in an init MySQL file'''
         try:
             with open(self.filename, 'r') as cmd_file:
@@ -26,24 +28,22 @@ class Database:
         except FileNotFoundError:
             print("Couldn't open commands file \"" + self.filename + "\"")
 
-    def db_connexion(self):
+    def database_connexion(self):
         '''Use mysql.connector to allow access to the chosen database'''
         self.connexion = con.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database= DB_NAME)
         self.curs = self.connexion.cursor(buffered=True)
 
-    def db_check_in(self):
+    def database_check_in(self):
         '''Check if the database is already filled or not'''
 
-    def data_recording(self):
+    def data_recording(self, api):
         '''Pick precisely each chosen data and record it into the database'''
         print('Enregistrement des produits...')
         self.cat_insert = DB_CATEGORIES_INSERT #first we record in the table Categories
         for result in api.products_list:
             for api.categories in result['products']:
                 self.cat_data = (api.categories['categories'])
-                # print(self.cat_data)
-                # exit(0)
-                self.curs.execute(self.insert, self.data)
+                self.curs.execute(self.cat_insert, self.cat_data)
             self.connexion.commit()
         exit(0)
 
@@ -70,7 +70,7 @@ class Database:
         '''Print all the previously saved favorites'''
         pass
 
-    def db_closing(self):
+    def database_closing(self):
         '''Closing the database'''
         self.curs.close()
         self.connexion.close()
