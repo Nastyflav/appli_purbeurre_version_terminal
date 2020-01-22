@@ -7,7 +7,7 @@ from Settings.constants import *
 
 
 class Interface:
-    '''A class to centralize the user's interactions with the terminal and all the possible scenarios'''
+    '''A class to centralize the user's interactions with the terminal'''
     def __init__(self):
         pass
 
