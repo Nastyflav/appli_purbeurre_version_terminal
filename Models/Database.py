@@ -58,9 +58,17 @@ class Database:
                             element['nutrition_grade_fr'], element['url'])
                 self.curs.execute(self.products_insert, self.data)
 
-    def products_select(self):
+    def select_products(self):
         '''Pick the product using its category and then its name'''
         pass
+
+    def select_substitutes(self):
+        '''Pick a bunch of products with higher nutritive grade'''
+        pass
+
+    def select_favorites(self):
+        '''Pick all the user's favorites'''
+        pass 
 
     def save_favorites(self):
         '''Allow the user to save his query into the database'''

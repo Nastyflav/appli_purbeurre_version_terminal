@@ -11,21 +11,31 @@ class Interface:
     def __init__(self):
         self.database = Database(api)
 
-    def products_display(self):
+    def product_display(self):
         '''How every product is displayed into the terminal'''
-        pass
+        print('====Fiche produit====')
+        print(f'Nom :')
+        print(f'Catégorie(s)')
+        print(f'Description :')
+        print(f'Nova (traceur qualité)')
+        print(f'Lien')
 
     def category_choice(self):
         '''Method to make a first selection level by category from the DB'''
-        pass
+        print('====Chargement des catégories====')
 
     def food_choice(self):
         '''Method to achieve the selection among all products from a category'''
-        pass
+        print('====Chargement des produits====')
+        self.database.select_products()
+        print('====Chargement terminé====')
+        self.product_display()
 
     def substitutes_proposal(self):
         '''Select from the DB a list of similar products, with higher grades'''
-        pass
+        print('====Chargement des substituts====')
+        self.database.select_substitutes()
+        print('====Chargement terminé====')
 
     def substitutes_saving(self):
         '''The user can save his query result'''
@@ -35,5 +45,7 @@ class Interface:
 
     def favorites_from_db(self):
         '''The user can directly look at his previous saves'''
-        pass
+        print('====Chargement de vos favoris====')
+        self.database.select_favorites()
+        print('====Chargement terminé====')
 
