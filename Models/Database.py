@@ -11,11 +11,20 @@ from Settings.constants import *
 class Database:
     '''Manage all the primary aspects regarding the database as connexion, error issues, data selection'''
     def __init__(self, api):
+        self.db_name = 'purbeurre'
         self.filename = FILENAME
         self.api = api
-        '''No connexion yet'''
-        self.connexion = False
+        self.connexion = False # No connexion yet
         self.curs = False
+
+    def database_connexion(self):
+        '''Use mysql.connector to allow access to the chosen database'''
+        self.connexion = con.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD)
+        self.curs = self.connexion.cursor(buffered=True)
+
+    def database_selection(self):
+        '''To aim the database we want to use'''
+        self.connexion.database = self.db_name
 
     def database_creation(self):
         '''Create a database in the user's system using instructions in an init MySQL file'''
@@ -28,40 +37,25 @@ class Database:
         except FileNotFoundError:
             print("Couldn't open commands file \"" + self.filename + "\"")
 
-    def database_connexion(self):
-        '''Use mysql.connector to allow access to the chosen database'''
-        self.connexion = con.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database= DB_NAME)
-        self.curs = self.connexion.cursor(buffered=True)
-
     def database_check_in(self):
         '''Check if the database already exists'''
-        # if no database name as DB_NAME:
-            # method = None
-
-    def products_check_in(self):
-        '''Check if the database is properly filled'''
-        # if not enough products in the database:
-            # self.database_connexion()
-            # self.api.data_loading()
-            # self.data_recording()
+        query = 'SELECT * FROM Categories LIMIT 1'
+        self.curs.execute(query)
+        return self.curs.fetchone()
                 
     def data_recording(self, api):
         '''Pick precisely each chosen data and record it into the database'''
-        print('Enregistrement des produits...')
         self.cat_insert = DB_CATEGORIES_INSERT #first we record in the table Categories
-        for result in api.products_list:
-            for api.categories in result['products']:
-                self.cat_data = (api.categories['categories'])
-                print(self.cat_data)
+        for category in API_CATEGORIES:
+            self.cat_data = (category[API_CATEGORIES])
+        self.curs.execute(self.cat_insert, self.cat_data)
+        self.connexion.commit()
         exit(0)
-            #     self.curs.execute(self.cat_insert, self.cat_data)
-            # self.connexion.commit()
-
         self.products_insert = DB_PRODUCTS_INSERT #Then we add all products
         for result in api.products_list:
             for element in result['products']:
-                self.data = (element['product_name'], element['generic_name_fr'], element['unique_scans_n'], \
-                             element['stores'], element['nutrition_grade_fr'], element['url'])
+                self.data = (element['product_name'], element['generic_name_fr'], element['stores'], \
+                            element['nutrition_grade_fr'], element['url'])
                 self.curs.execute(self.products_insert, self.data)
 
     def products_select(self):
@@ -70,8 +64,8 @@ class Database:
 
     def save_favorites(self):
         '''Allow the user to save his query into the database'''
-        self.favorites_insert = DB_FAVORITES_INSERT
-        self.fav_data =
+        # self.favorites_insert = DB_FAVORITES_INSERT
+        # self.fav_data =
 
     def database_closing(self):
         '''Closing the database'''

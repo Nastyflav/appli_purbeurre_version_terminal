@@ -7,21 +7,22 @@ from Models.Interface import Interface
 from Settings.constants import *
 
 
-class LaunchApp(self):
+class LaunchApp:
     '''Define what happens when someone is using the app'''
     def __init__(self):
         self.api = APIRequest()
-        self.db = Database(api)
-        self.inter = Interface()
+        self.db = Database(self.api)
+        # self.inter = Interface()
 
     def regular_start(self):
         '''Start and close the app when the database is already created'''
         print('====PUR BEURRE, l\'application====')
-        # self.db.database_check_in()
-            # if method is None
-                # self.first_start()
-        # self.db.products_check_in()
-        # self.db.database connexion() ???
+        self.db.database_connexion()
+        if self.db.database_selection() is None:
+            self.first_start()
+        if self.db.database_check_in() is None:
+            self.first_start()
+
         # continue = True
         # while continue:
             # Selection menu
@@ -38,15 +39,15 @@ class LaunchApp(self):
     def first_start(self):
         '''When database is missing or first use of the app'''
         print('====Bienvenue sur Pur Beurre====')
-        print('====Création de votre base de données en cours====')
-        self.database_creation()
-        print('=====Les stocks sont au plus bas !====')
-        print('=====Téléchargement des données====')
-        self.api.data_loading()
-        print('=====Reconstitution des stocks en cours====')
-        self.database_connexion()
-        self.database_recording(api)
-        print('====Votre magasin est désormais opérationnel !')
+        # print('====Création de votre base de données en cours====')
+        # self.database_creation()
+        # print('=====Les stocks sont au plus bas !====')
+        # print('=====Téléchargement des données====')
+        # self.api.data_loading()
+        # print('=====Reconstitution des stocks en cours====')
+        # self.database_connexion()
+        # self.database_recording(api)
+        # print('====Votre magasin est désormais opérationnel !')
 
     def app_closing(self):
         '''To close properly the app'''
@@ -62,4 +63,4 @@ class LaunchApp(self):
     def favorites_query(self):
         '''If the user wants to take a look at his previous queries'''
         print('====Voici vos produits sauvegardés====')
-        self.db.favorites_from_db()
+        # self.db.favorites_from_db()

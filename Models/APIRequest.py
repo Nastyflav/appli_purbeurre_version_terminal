@@ -19,9 +19,8 @@ class APIRequest:
         for category in self.categories:
             pages = API_PAGES_NUMBER
             for x in pages:
-                payload = {'action': 'process', 'tagtype_0': 'categories', 'tag_contains_0': 'contains',
-                       'tag_0': category, 'sort_by': 'unique_scans', 'page_size': API_PAGE_SIZE, 'page': x,
-                       'json': '1'}
+                payload = {'action': 'process', 'tag_contains_0': 'contains', 'tagtype_0': 'categories', \
+                        'tag_1': 'france','page_size': API_PAGE_SIZE, 'page': x, 'json': '1'}
                 request = rq.get(API_URL_SOURCE, params=payload)
-                datas = request.json()#json decoder, raises an exception in case of json decoding fails#
+                datas = request.json() # json decoder, raises an exception in case of json decoding fails#
                 self.products_list.append(datas)
