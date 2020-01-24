@@ -55,7 +55,7 @@ class Database:
         for result in api.products_list:
             for element in result['products']:
                 self.data = (element['product_name'], element['generic_name_fr'], element['stores'], \
-                            element['nutrition_grade_fr'], element['barcode'] element['url'])
+                            element['nutrition_grade_fr'], element['code'] element['url'])
                 self.curs.execute(self.products_insert, self.data)
 
     def select_products(self):

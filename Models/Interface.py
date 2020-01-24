@@ -17,7 +17,7 @@ class Interface:
         print(f'Nom :')
         print(f'Catégorie(s)')
         print(f'Description :')
-        print(f'Nova (traceur qualité)')
+        print(f'Groupe Nova (traceur qualité)')
         print(f'Lien')
 
     def category_choice(self):
