@@ -12,14 +12,15 @@ def main():
     api = APIRequest()
     db = Database(api)
     # api.data_loading()
-    # db.database_connexion()
+    db.database_connexion()
+    db.database_selection()
     # db.database_check_in()
-    # db.data_recording(api)
+    db.data_recording(api)
     # print(api.products_list)
     # db.database_creation()
 
-    launch = LaunchApp()
-    launch.regular_start()
+    # launch = LaunchApp()
+    # launch.regular_start()
 
 if __name__ == "__main__":
     main()

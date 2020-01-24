@@ -45,17 +45,15 @@ class Database:
                 
     def data_recording(self, api):
         '''Pick precisely each chosen data and record it into the database'''
-        self.cat_insert = DB_CATEGORIES_INSERT #first we record in the table Categories
-        for category in API_CATEGORIES:
-            self.cat_data = (category[API_CATEGORIES])
-        self.curs.execute(self.cat_insert, self.cat_data)
+        # self.cat_insert = DB_CATEGORIES_INSERT #first we record in the table Categories
+        self.curs.execute(DB_CATEGORIES_INSERT)
         self.connexion.commit()
         exit(0)
         self.products_insert = DB_PRODUCTS_INSERT #Then we add all products
         for result in api.products_list:
             for element in result['products']:
                 self.data = (element['product_name'], element['generic_name_fr'], element['stores'], \
-                            element['nutrition_grade_fr'], element['code'] element['url'])
+                            element['nutrition_grade_fr'], element['code'], element['url'])
                 self.curs.execute(self.products_insert, self.data)
 
     def select_products(self):

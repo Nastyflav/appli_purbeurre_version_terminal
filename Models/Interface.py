@@ -14,11 +14,12 @@ class Interface:
     def product_display(self):
         '''How every product is displayed into the terminal'''
         print('====Fiche produit====')
-        print(f'Nom :')
-        print(f'Catégorie(s)')
-        print(f'Description :')
-        print(f'Groupe Nova (traceur qualité)')
-        print(f'Lien')
+        print(f'Nom : ')
+        print(f'Catégorie(s) : ')
+        print(f'Description : ')
+        print(f'Groupe Nova (traceur qualité): ')
+        print(f'Code-barre : ')
+        print(f'Lien : ')
 
     def category_choice(self):
         '''Method to make a first selection level by category from the DB'''
