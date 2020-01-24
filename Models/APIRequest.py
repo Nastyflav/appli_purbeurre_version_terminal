@@ -11,7 +11,7 @@ class APIRequest:
     '''Class to load a data list from the OFF API products into the database'''
     def __init__(self):
         '''Define the category products we want'''
-        self.categories = API_CATEGORIES
+        self.categories = ['pâte à tartiner', 'thés', 'fromages blancs', 'jus de fruits', 'confitures de fruits']
         self.products_list = []
 
     def data_loading(self):

@@ -42,19 +42,25 @@ class Database:
         query = 'SELECT * FROM Categories LIMIT 1'
         self.curs.execute(query)
         return self.curs.fetchone()
-                
-    def data_recording(self, api):
-        '''Pick precisely each chosen data and record it into the database'''
-        # self.cat_insert = DB_CATEGORIES_INSERT #first we record in the table Categories
-        self.curs.execute(DB_CATEGORIES_INSERT)
-        self.connexion.commit()
-        exit(0)
-        self.products_insert = DB_PRODUCTS_INSERT #Then we add all products
+
+    def data_sorting(self, api):
+        '''Select some datas from the API search, only the ones we need'''
         for result in api.products_list:
             for element in result['products']:
-                self.data = (element['product_name'], element['generic_name_fr'], element['stores'], \
-                            element['nutrition_grade_fr'], element['code'], element['url'])
-                self.curs.execute(self.products_insert, self.data)
+                self.product_name = element['product_name']
+                self.description = element['generic_name_fr']
+                self.stores = element['stores']
+                self.nova = element['nova_group']
+                self.code = element['code']
+                self.link = element['url']
+                print(self.link)
+                # self.products_insert = DB_PRODUCTS_INSERT
+                # self.curs.execute(self.products_insert, self.data)
+
+    def categories_recording(self):
+        '''Fill the categories with every chosen name'''
+        self.curs.execute(DB_CATEGORIES_INSERT)
+        self.connexion.commit()
 
     def select_products(self):
         '''Pick the product using its category and then its name'''
