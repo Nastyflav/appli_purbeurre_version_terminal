@@ -12,11 +12,11 @@ def main():
     api = APIRequest()
     db = Database(api)
     api.data_loading()
+    # print(api.products_list)
     db.database_connexion()
     db.database_selection()
     # db.database_check_in()
     db.data_sorting(api)
-    # print(api.products_list)
     # db.database_creation()
 
     # launch = LaunchApp()

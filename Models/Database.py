@@ -48,9 +48,9 @@ class Database:
         for result in api.products_list:
             for element in result['products']:
                 self.product_name = element['product_name']
-                self.description = element['generic_name_fr']
+                # self.description = element['generic_name_fr']
                 self.stores = element['stores']
-                self.nova = element['nova_group']
+                # self.nova = element['nova_group']
                 self.code = element['code']
                 self.link = element['url']
                 print(self.link)
