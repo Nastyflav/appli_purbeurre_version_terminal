@@ -4,6 +4,7 @@
 from Models.APIRequest import APIRequest
 from Models.Database import Database
 from Models.Interface import Interface
+from Controllers.KeyboardController import KeyboardController
 from Settings.constants import *
 
 

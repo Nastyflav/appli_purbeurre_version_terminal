@@ -7,7 +7,7 @@ from Settings.constants import *
 
 
 class Interface:
-    '''A class to centralize the user's interactions with the terminal'''
+    '''A class to centralize the database interactions with the terminal'''
     def __init__(self):
         self.database = Database(api)
 

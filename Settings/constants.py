@@ -19,8 +19,8 @@ API_URL_SOURCE = 'https://fr.openfoodfacts.org/cgi/search.pl?'
 #Database recording parameters#
 
 FILENAME = 'db_init.sql'
-DB_PRODUCTS_INSERT = 'INSERT IGNORE INTO products (name, description, nova_groups, store, url)\
-                    VALUES (%s, %s, %s, %s, %s)'
+DB_PRODUCTS_INSERT = 'INSERT IGNORE INTO products (name, description, nova_groups, store, barcode, url)\
+                    VALUES (%s, %s, %s, %s, %s, %s)'
 DB_CATEGORIES_INSERT = 'INSERT IGNORE INTO categories (name) VALUES (%s)'
 DB_FAVORITES_INSERT = 'INSERT IGNORE INTO favorites (substitute_id, original_product_id) \
                     VALUES (%s, %s)'
