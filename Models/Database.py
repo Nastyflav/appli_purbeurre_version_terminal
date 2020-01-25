@@ -53,7 +53,7 @@ class Database:
                 # self.nova = element['nova_group']
                 self.code = element['code']
                 self.link = element['url']
-                print(self.link)
+                print(self.product_name)
                 # self.products_insert = DB_PRODUCTS_INSERT
                 # self.curs.execute(self.products_insert, self.data)
 
