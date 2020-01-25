@@ -76,7 +76,7 @@ Consultez votre historique - Tapez 2
 Then you can choose a category among all that the program provides :
 ```
 ====CATEGORIES=====
-Pâte à tartiner - Tapez 1
+Pâtes à tartiner - Tapez 1
 Thés - Tapez 2
 Fromages blancs - Tapez 3
 Jus de fruits - Tapez 4
@@ -95,7 +95,7 @@ Choisissez un produit à substituer en tapant son numéro :
 
 Based on the same system than during the product selection. The user can choose among a list of higher quality products and print its caracteristics :
 ```
-====BETTER, HEALTHIER====
+====BETTER, HEALTHIER, TASTIER====
 ```
 
 # 5. Save a substitute

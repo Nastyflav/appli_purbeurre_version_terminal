@@ -23,20 +23,26 @@ class Interface:
 
     def category_choice(self):
         '''Method to make a first selection level by category from the DB'''
-        print('====Chargement des catégories====')
+        print('====CATEGORIES====')
 
     def food_choice(self):
         '''Method to achieve the selection among all products from a category'''
         print('====Chargement des produits====')
         self.database.select_products()
         print('====Chargement terminé====')
+        print('====ALIMENTS====')
         self.product_display()
+        print('Choisissez un produit à substituer en tapant son numéro :')
 
     def substitutes_proposal(self):
         '''Select from the DB a list of similar products, with higher grades'''
         print('====Chargement des substituts====')
         self.database.select_substitutes()
         print('====Chargement terminé====')
+        print('BETTER, HEALTHIER, TASTIER')
+        print('Souhaitez vous placer ce produit dans vos favoris ? \
+        Oui - Tapez 1 \
+        Non - Tapez 2'
 
     def substitutes_saving(self):
         '''The user can save his query result'''
@@ -49,4 +55,5 @@ class Interface:
         print('====Chargement de vos favoris====')
         self.database.select_favorites()
         print('====Chargement terminé====')
+        print('====HALL OF FAME====')
 
