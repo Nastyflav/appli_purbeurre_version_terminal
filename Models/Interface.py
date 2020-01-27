@@ -42,7 +42,7 @@ class Interface:
         print('BETTER, HEALTHIER, TASTIER')
         print('Souhaitez vous placer ce produit dans vos favoris ? \
         Oui - Tapez 1 \
-        Non - Tapez 2'
+        Non - Tapez 2')
 
     def substitutes_saving(self):
         '''The user can save his query result'''

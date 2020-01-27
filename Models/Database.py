@@ -51,7 +51,7 @@ class Database:
                 self.product_name = element['product_name']
                 self.description = element['generic_name_fr']
                 self.stores = element['stores']
-                self.nova = element['nutrition_grade_fr']
+                self.nova = element['nova_groups']
                 self.code = element['code']
                 self.link = element['url']
                 print(self.nova)
