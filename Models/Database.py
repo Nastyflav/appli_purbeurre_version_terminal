@@ -45,20 +45,23 @@ class Database:
 
     def data_sorting(self, api):
         '''Select some datas from the API search, only the ones we need'''
+        self.keys = ['product_name', 'generic_name_fr', 'stores', 'nova_groups', 'code', 'url']
         self.final_data = []
         for result in api.products_list:
             for element in result['products']:
-                self.product_name = element['product_name']
-                self.description = element['generic_name_fr']
-                self.stores = element['stores']
-                self.nova = element['nova_groups']
-                self.code = element['code']
-                self.link = element['url']
-                print(self.nova)
-        #         self.all_product = [self.product_name, self.generic_name_fr, self.stores \
-        #                             self.nova, self.code, self.link]
-        #     self.final_data.append(self.all_product)
-        # return self.final_data
+                if self.keys[0] in element and self.keys[1] in element and self.keys[2] in element and self.keys[3] \
+                     in element and self.keys[4] in element and self.keys[5] in element:
+                    self.product_name = element['product_name']
+                    self.description = element['generic_name_fr']
+                    self.stores = element['stores']
+                    self.nova = element['nova_groups']
+                    self.code = element['code']
+                    self.link = element['url']
+                    self.total_product = [self.product_name, self.description, self.stores, \
+                                    self.nova, self.code, self.link]
+            self.final_data.append(self.total_product)
+            print(self.final_data)
+        return self.final_data
 
     def categories_recording(self):
         '''Fill the categories with every chosen name'''
