@@ -20,7 +20,7 @@ class Database:
     def database_connexion(self):
         '''Use mysql.connector to allow access to the chosen database'''
         self.connexion = con.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD)
-        self.curs = self.connexion.cursor(buffered=True)
+        self.curs = self.connexion.cursor()
 
     def database_selection(self):
         '''To aim the database we want to use'''
@@ -51,8 +51,9 @@ class Database:
     def products_recording(self, api):
         '''Fill the products table with every sorted element'''
         for product in api.products_list:
-            self.products_insert = DB_PRODUCTS_INSERT
-            self.curs.execute(self.products_insert, self.final_data)
+            self.insert = DB_PRODUCTS_INSERT
+            self.curs.execute(self.insert, product)
+        self.connexion.commit()
 
     def select_products(self):
         '''Pick the product using its category and then its name'''

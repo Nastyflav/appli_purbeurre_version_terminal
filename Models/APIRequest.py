@@ -17,23 +17,23 @@ class APIRequest:
         self.keys = ['product_name', 'generic_name_fr', 'stores', 'nova_groups', 'code', 'url']
 
     def data_loading(self):
-        '''Make a request to the API and fill the products list'''
+        '''Make a request to the API and sort all the datas'''
         
         for category in self.categories:
             pages = API_PAGES_NUMBER
-            for x in pages:
+            for page in range(pages):
                 payload = {'action': 'process', 'tagtype_0': 'categories', 'tag_contains_0': 'contains',  \
-                        'tag_0': category, 'page_size': API_PAGE_SIZE, 'page': x, 'json': 1}
+                        'tag_0': category, 'page_size': API_PAGE_SIZE, 'page': (page + 1), 'json': 1}
                 self.request = rq.get(API_URL_SOURCE, params=payload)
                 self.json_data = json.loads(self.request.text)
                 with open('results.json', 'w') as f:
                     f.write(json.dumps(self.json_data, indent=4))
 
-                for data in self.json_data['products']:
+                for data in self.json_data['products']: # using the keys to select every product even if some keys are missing
                     self.temp_dict = {}
                     if self.keys[0] in data and self.keys[1] in data and self.keys[2] in data and self.keys[3] \
                      in data and self.keys[4] in data and self.keys[5] in data:
                         for key in self.keys:
                             self.temp_dict[key] = data[key]                 
-                self.products_list.append(self.temp_dict)
-                print(self.products_list)
+                    self.products_list.append(self.temp_dict)
+                    
