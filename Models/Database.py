@@ -43,35 +43,16 @@ class Database:
         self.curs.execute(query)
         return self.curs.fetchone()
 
-    def data_sorting(self, api):
-        '''Select some datas from the API search, only the ones we need'''
-        self.keys = ['product_name', 'generic_name_fr', 'stores', 'nova_groups', 'code', 'url']
-        self.final_data = []
-        for result in api.products_list:
-            for element in result['products']:
-                if self.keys[0] in element and self.keys[1] in element and self.keys[2] in element and self.keys[3] \
-                     in element and self.keys[4] in element and self.keys[5] in element:
-                    self.product_name = element['product_name']
-                    self.description = element['generic_name_fr']
-                    self.stores = element['stores']
-                    self.nova = element['nova_groups']
-                    self.code = element['code']
-                    self.link = element['url']
-                    self.total_product = [self.product_name, self.description, self.stores, \
-                                    self.nova, self.code, self.link]
-            self.final_data.append(self.total_product)
-            print(self.final_data)
-        return self.final_data
-
     def categories_recording(self):
         '''Fill the categories with every chosen name'''
         self.curs.execute(DB_CATEGORIES_INSERT)
         self.connexion.commit()
 
-    def products_recording(self):
+    def products_recording(self, api):
         '''Fill the products table with every sorted element'''
-        self.products_insert = DB_PRODUCTS_INSERT
-        self.curs.execute(self.products_insert, self.final_data)
+        for product in api.products_list:
+            self.products_insert = DB_PRODUCTS_INSERT
+            self.curs.execute(self.products_insert, self.final_data)
 
     def select_products(self):
         '''Pick the product using its category and then its name'''
