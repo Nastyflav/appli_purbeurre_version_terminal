@@ -1,19 +1,20 @@
 CREATE DATABASE IF NOT EXISTS purbeurre DEFAULT CHARACTER SET 'utf8';
 USE purbeurre;
 CREATE TABLE IF NOT EXISTS Categories (id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                    name VARCHAR(50) NOT NULL UNIQUE,
-                    PRIMARY KEY (id)
+                    name VARCHAR(50) NOT NULL,
+                    PRIMARY KEY (id),
+                    UNIQUE INDEX ind_cat_name(name)
                     )
                     ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS Products (id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                    name VARCHAR(50) NOT NULL UNIQUE,
-                    description VARCHAR(250),
-                    category_id INT UNSIGNED NOT NULL,
+                    name VARCHAR(100) NOT NULL,
+                    description VARCHAR(200),
                     store VARCHAR(200),
-                    nova_groups VARCHAR(1) NOT NULL,
-					barcode VARCHAR(30) NOT NULL,
-                    url VARCHAR(200) NOT NULL UNIQUE,
+                    nova_groups CHAR(1) NOT NULL,
+					barcode BIGINT UNSIGNED NOT NULL,
+                    url VARCHAR(200) NOT NULL,
                     PRIMARY KEY (id),
+                    UNIQUE INDEX ind_barcode_name(barcode, name),
                     CONSTRAINT FK_product_category FOREIGN KEY (category_id) REFERENCES Categories (id)
                     )
                     ENGINE = InnoDB;

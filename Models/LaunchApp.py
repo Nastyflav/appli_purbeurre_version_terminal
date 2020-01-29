@@ -40,15 +40,15 @@ class LaunchApp:
     def first_start(self):
         '''When database is missing or first use of the app'''
         print('====Bienvenue sur Pur Beurre====')
-        # print('====Création de votre base de données en cours====')
-        # self.database_creation()
-        # print('=====Les stocks sont au plus bas !====')
-        # print('=====Téléchargement des données====')
-        # self.api.data_loading()
-        # print('=====Reconstitution des stocks en cours====')
-        # self.database_connexion()
-        # self.database_recording(api)
-        # print('====Votre magasin est désormais opérationnel !')
+        print('====Création de votre base de données en cours====')
+        self.db.database_creation()
+        print('=====Les stocks sont au plus bas !====')
+        print('=====Téléchargement des données====')
+        self.api.data_loading()
+        print('=====Reconstitution des stocks en cours====')
+        self.db.categories_recording()
+        self.db.products_recording(self.api)
+        print('====Votre magasin est désormais opérationnel !')
 
     def app_closing(self):
         '''To close properly the app'''

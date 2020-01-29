@@ -39,4 +39,4 @@ class APIRequest:
                 
                 while {} in self.products_list:
                     self.products_list.remove({})    
-                print(self.products_list)
+                

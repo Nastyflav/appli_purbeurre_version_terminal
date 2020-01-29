@@ -13,14 +13,14 @@ DB_PASSWORD = 'Flying14!'
 
 API_PAGE_SIZE = 20
 API_PAGES_NUMBER = 1
-API_CATEGORIES = {'pâte à tartiner', 'thés', 'fromages blancs', 'jus de fruits', 'confitures de fruits'}
+API_CATEGORIES = {'pâte à tartiner', 'thés en sachet', 'fromages blancs', 'jus de fruits', 'confitures de fruits'}
 API_URL_SOURCE = 'https://fr.openfoodfacts.org/cgi/search.pl?'
 
 #Database recording parameters#
 
 FILENAME = 'db_init.sql'
-DB_PRODUCTS_INSERT = 'INSERT IGNORE INTO products (name, description, store, nova_groups, barcode, url)\
-                     VALUES (%(product_name)s, %(generic_name_fr)s, %(stores)s, %(nova_groups)s, %(code)s, %(url)s)'
+DB_PRODUCTS_INSERT = """INSERT IGNORE INTO products (name, description, store, nova_groups, barcode, url)\
+                     VALUES (%(product_name)s, %(generic_name_fr)s, %(stores)s, %(nova_groups)s, %(code)s, %(url)s)"""
 DB_CATEGORIES_INSERT = """INSERT INTO Categories (name)
                                 VALUES
                                 ('Pâtes à tartiner'),
