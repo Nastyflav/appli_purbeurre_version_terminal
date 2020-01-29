@@ -9,13 +9,14 @@ CREATE TABLE IF NOT EXISTS Categories (id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 CREATE TABLE IF NOT EXISTS Products (id INT UNSIGNED NOT NULL AUTO_INCREMENT,
                     name VARCHAR(100) NOT NULL,
                     description VARCHAR(200),
+                    category_id INT UNSIGNED NOT NULL,
                     store VARCHAR(200),
                     nova_groups CHAR(1) NOT NULL,
 					barcode BIGINT UNSIGNED NOT NULL,
                     url VARCHAR(200) NOT NULL,
                     PRIMARY KEY (id),
                     UNIQUE INDEX ind_barcode_name(barcode, name),
-                    CONSTRAINT FK_product_category FOREIGN KEY (category_id) REFERENCES Categories (id)
+                    CONSTRAINT FK_product_category FOREIGN KEY (category_id) REFERENCES Categories (id) ON DELETE CASCADE
                     )
                     ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS Favorites (id INT UNSIGNED NOT NULL AUTO_INCREMENT,

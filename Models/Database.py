@@ -51,8 +51,7 @@ class Database:
     def products_recording(self, api):
         '''Fill the products table with every sorted element'''
         for product in api.products_list:
-            for category in api.categories:
-                self.curs.execute('INSERT IGNORE INTO products (name, description, store, nova_groups, barcode, url)\
+            self.curs.execute('INSERT IGNORE INTO products (name, description, store, nova_groups, barcode, url)\
                         VALUES (%(product_name)s, %(generic_name_fr)s, %(stores)s, %(nova_groups)s, %(code)s, %(url)s)', product)
         self.connexion.commit()
 

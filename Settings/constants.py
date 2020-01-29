@@ -27,6 +27,6 @@ DB_CATEGORIES_INSERT = """INSERT INTO Categories (name)
                                 ('Thés'),
                                 ('Fromages blancs'),
                                 ('Jus de fruits'),
-                                ('Confitures de fruits');"""
+                                ('Confitures de fruits')"""
 DB_FAVORITES_INSERT = 'INSERT IGNORE INTO favorites (substitute_id, original_product_id) \
                     VALUES (%s, %s)'
