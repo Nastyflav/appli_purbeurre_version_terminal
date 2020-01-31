@@ -18,7 +18,6 @@ class APIRequest:
 
     def data_loading(self):
         '''Make a request to the API and sort all the datas'''
-        
         for category in self.categories:
             pages = API_PAGES_NUMBER
             for page in range(pages):
@@ -38,5 +37,5 @@ class APIRequest:
                     self.products_list.append(self.temp_dict)
                 
                 while {} in self.products_list:
-                    self.products_list.remove({})    
+                    self.products_list.remove({}) 
                
