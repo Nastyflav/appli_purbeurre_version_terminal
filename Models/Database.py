@@ -65,15 +65,13 @@ class Database:
         categories = api.categories
         products = api.products_list
         for x, data in zip(categories, products):
-            # print(product[0])
-            # exit(0)
             self.curs.execute(""" INSERT IGNORE INTO Categories (name)
                                VALUES ({0})""".format("\'"+x+"\'"))
             self.connexion.commit()
-            # self.curs.execute('INSERT IGNORE INTO Products (name, description, category_id, store, nova_groups, barcode, url)\
-            #             VALUES (%(product_name)s, %(generic_name_fr)s, (SELECT id FROM Categories WHERE name = %(jus de fruits)s) \
-            #                      %(stores)s, %(nova_groups)s, %(code)s, %(url)s)', product)
-        self.connexion.commit()
+            for product in data:
+                self.curs.execute("""INSERT IGNORE INTO Products (name, description, category_id, store, nova_groups, barcode, url)\
+                                    VALUES (%(product_name)s, %(generic_name_fr)s, (SELECT id FROM Categories WHERE name = {1}), %(stores)s, %(nova_groups)s, %(code)s, %(url)s)""")
+                self.connexion.commit()
 
     def save_favorites(self):
         '''Allow the user to save his query into the database'''

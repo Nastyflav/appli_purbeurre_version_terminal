@@ -37,5 +37,5 @@ class APIRequest:
                     self.products_list.append(self.temp_dict)
                 
                 while {} in self.products_list:
-                    self.products_list.remove({}) 
+                    self.products_list.remove({})
                
