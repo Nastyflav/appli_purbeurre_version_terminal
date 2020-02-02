@@ -14,6 +14,7 @@ class Database:
         self.db_name = 'purbeurre'
         self.filename = FILENAME
         self.api = api
+        self.keys = ['product_name', 'generic_name_fr', 'stores', 'nova_groups', 'code', 'url']
         self.connexion = False # No connexion yet
         self.curs = False
 
@@ -43,23 +44,6 @@ class Database:
         self.curs.execute(query)
         return self.curs.fetchone()
 
-    def categories_recording(self, category):
-        '''Fill the categories with every chosen name'''
-        self.curs.execute(""" INSERT INTO Categories (name)
-                               VALUES ("{}"); """
-                       .format(category))
-        self.connexion.commit()
-
-    def cat(self):
-        for category in API_CATEGORIES:
-            self.categories_recording(category)
-
-    def cat_id(self):
-        self.curs.execute('SELECT id FROM categories')
-        self.cat_id = self.curs.fetchall()
-        print(self.cat_id)
-        return self.cat_id
-
     def products_recording(self, api):
         '''Fill the products table with every sorted element'''
         categories = api.categories
@@ -68,10 +52,23 @@ class Database:
             self.curs.execute(""" INSERT IGNORE INTO Categories (name)
                                VALUES ({0})""".format("\'"+x+"\'"))
             self.connexion.commit()
-            for product in data:
-                self.curs.execute("""INSERT IGNORE INTO Products (name, description, category_id, store, nova_groups, barcode, url)\
-                                    VALUES (%(product_name)s, %(generic_name_fr)s, (SELECT id FROM Categories WHERE name = {1}), %(stores)s, %(nova_groups)s, %(code)s, %(url)s)""")
-                self.connexion.commit()
+
+            for product in data['products']:
+                try :
+                    name = "\'"+product['product_name'].replace("'", "")+"\'"
+                    descr = "\'"+product['generic_name_fr'].replace("'", "")+"\'"
+                    store = "\'"+product['stores'].replace("'", "")+"\'"
+                    nova = "\'"+product['nova_groups'].replace("'", "")+"\'"
+                    code = "\'"+product['code'].replace("'", "")+"\'"
+                    link = "\'"+product['url'].replace("'", "")+"\'"
+
+        
+                    self.curs.execute("""INSERT IGNORE INTO Products (name, description, category_id, store, nova_groups, barcode, url)
+                                    VALUES ({0}, {1}, (SELECT id FROM Categories WHERE name = {2}), {3}, {4}, {5}, {6})"""
+                                    .format(name, descr, "\'"+x+"\'", store, nova, code, link))
+                except KeyError :
+                    print('No data')
+            self.connexion.commit()
 
     def save_favorites(self):
         '''Allow the user to save his query into the database'''
@@ -83,9 +80,9 @@ class Database:
         self.curs.close()
         self.connexion.close()
 
-    def select_products(self):
+    def select_products(self, user_cat_an):
         '''Pick the product using its category and then its name'''
-        pass
+         self.curs.execute('SELECT id FROM Categories WHERE name = '%s'')
 
     def select_substitutes(self):
         '''Pick a bunch of products with higher nutritive grade'''
