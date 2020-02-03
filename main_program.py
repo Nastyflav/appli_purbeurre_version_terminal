@@ -17,7 +17,7 @@ def main():
     # db.database_check_in()
     # api.data_loading()
     # db.products_recording(api)
-    db.select_products()
+    db.select_products(229)
 
     # launch = LaunchApp()
     # launch.regular_start()

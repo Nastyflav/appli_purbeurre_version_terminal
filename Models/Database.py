@@ -80,9 +80,10 @@ class Database:
         self.curs.close()
         self.connexion.close()
 
-    def select_products(self, user_cat_an):
+    def select_products(self, selected_category):
         '''Pick the product using its category and then its name'''
-         self.curs.execute('SELECT id FROM Categories WHERE name = '%s'')
+        self.curs.execute("""SELECT id, name, nova_groups FROM Products WHERE category_id = {} AND nova_groups = 4""".format(selected_category))
+        self.selection = self.curs.fetchall()
 
     def select_substitutes(self):
         '''Pick a bunch of products with higher nutritive grade'''
