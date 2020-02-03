@@ -76,7 +76,7 @@ class Database:
         self.connexion.close()
 
     def select_categories(self):
-        self.curs.execute("""SELECT id, name FROM Categories ORDER BY id""")
+        self.curs.execute(DB_CATEGORIES_SELECTION)
         self.selected_cat = self.curs.fetchall()
         return self.selected_cat
 
@@ -86,9 +86,11 @@ class Database:
         self.selected_products = self.curs.fetchall()
         return self.selected_products
 
-    def select_substitutes(self):
+    def select_substitutes(self, selected_category):
         '''Pick a bunch of products with higher nutritive grade'''
-        pass
+        self.curs.execute(DB_FAVORITES_SELECTION.format(selected_category))
+        self.selected_substitutes = self.curs.fetchall()
+        return self.select_substitutes
 
     def select_favorites(self):
         '''Pick all the user's favorites'''

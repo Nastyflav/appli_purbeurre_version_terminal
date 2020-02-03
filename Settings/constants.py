@@ -25,3 +25,6 @@ DB_CATEGORIES_INSERT = """ INSERT IGNORE INTO Categories (name) VALUES ({0})"""
 DB_FAVORITES_INSERT = """INSERT IGNORE INTO favorites (substitute_id, original_product_id) VALUES (%s, %s)"""
 DB_PRODUCTS_SELECTION = """SELECT id, name, nova_groups FROM Products WHERE category_id = {} AND nova_groups = 4"""
 DB_CATEGORIES_SELECTION = """SELECT id, name FROM Categories ORDER BY id"""
+DB_FAVORITES_SELECTION = """SELECT id, name, description, nova_groups FROM Products 
+                            WHERE category_id = {} AND nova_groups < 4 
+                            ORDER BY nova_groups"""
