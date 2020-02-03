@@ -19,14 +19,8 @@ API_URL_SOURCE = 'https://fr.openfoodfacts.org/cgi/search.pl?'
 #Database recording parameters#
 
 FILENAME = 'db_init.sql'
-DB_PRODUCTS_INSERT = """INSERT IGNORE INTO products (name, description, store, nova_groups, barcode, url)\
-                     VALUES (%(product_name)s, %(generic_name_fr)s, %(stores)s, %(nova_groups)s, %(code)s, %(url)s)"""
-DB_CATEGORIES_INSERT = """INSERT INTO Categories (name)
-                                VALUES
-                                ('Pâtes à tartiner'),
-                                ('Thés'),
-                                ('Fromages blancs'),
-                                ('Jus de fruits'),
-                                ('Confitures de fruits')"""
-DB_FAVORITES_INSERT = 'INSERT IGNORE INTO favorites (substitute_id, original_product_id) \
-                    VALUES (%s, %s)'
+DB_PRODUCTS_INSERT = """INSERT IGNORE INTO Products (name, description, category_id, store, nova_groups, barcode, url)
+                        VALUES ({0}, {1}, (SELECT id FROM Categories WHERE name = {2}), {3}, {4}, {5}, {6})"""
+DB_CATEGORIES_INSERT = """ INSERT IGNORE INTO Categories (name) VALUES ({0})"""
+DB_FAVORITES_INSERT = """INSERT IGNORE INTO favorites (substitute_id, original_product_id) VALUES (%s, %s)"""
+DB_PRODUCTS_SELECTION = """SELECT id, name, nova_groups FROM Products WHERE category_id = {} AND nova_groups = 4"""

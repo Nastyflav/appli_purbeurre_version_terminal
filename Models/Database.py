@@ -45,12 +45,11 @@ class Database:
         return self.curs.fetchone()
 
     def products_recording(self, api):
-        '''Fill the products table with every sorted element'''
+        '''Fill the products and the categories tables with every sorted element from the API request'''
         categories = api.categories
         products = api.products_list
         for x, data in zip(categories, products):
-            self.curs.execute(""" INSERT IGNORE INTO Categories (name)
-                               VALUES ({0})""".format("\'"+x+"\'"))
+            self.curs.execute(DB_CATEGORIES_INSERT.format("\'"+x+"\'"))
             self.connexion.commit()
 
             for product in data['products']:
@@ -61,11 +60,7 @@ class Database:
                     nova = "\'"+product['nova_groups'].replace("'", "")+"\'"
                     code = "\'"+product['code'].replace("'", "")+"\'"
                     link = "\'"+product['url'].replace("'", "")+"\'"
-
-        
-                    self.curs.execute("""INSERT IGNORE INTO Products (name, description, category_id, store, nova_groups, barcode, url)
-                                    VALUES ({0}, {1}, (SELECT id FROM Categories WHERE name = {2}), {3}, {4}, {5}, {6})"""
-                                    .format(name, descr, "\'"+x+"\'", store, nova, code, link))
+                    self.curs.execute(DB_PRODUCTS_INSERT.format(name, descr, "\'"+x+"\'", store, nova, code, link))
                 except KeyError :
                     print('No data')
             self.connexion.commit()
@@ -81,8 +76,8 @@ class Database:
         self.connexion.close()
 
     def select_products(self, selected_category):
-        '''Pick the product using its category and then its name'''
-        self.curs.execute("""SELECT id, name, nova_groups FROM Products WHERE category_id = {} AND nova_groups = 4""".format(selected_category))
+        '''Pick the product using its category and then its grade'''
+        self.curs.execute(DB_PRODUCTS_SELECTION.format(selected_category))
         self.selection = self.curs.fetchall()
 
     def select_substitutes(self):

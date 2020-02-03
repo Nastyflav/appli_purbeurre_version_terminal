@@ -4,8 +4,7 @@
 import requests as rq
 import json
 
-from Settings.constants import API_PAGE_SIZE, API_PAGES_NUMBER, API_CATEGORIES, API_URL_SOURCE, \
-                                DB_PRODUCTS_INSERT, DB_CATEGORIES_INSERT
+from Settings.constants import API_PAGE_SIZE, API_PAGES_NUMBER, API_CATEGORIES, API_URL_SOURCE
 
 
 class APIRequest:
