@@ -13,7 +13,6 @@ class LaunchApp:
     def __init__(self):
         self.api = APIRequest()
         self.db = Database(self.api)
-        # self.inter = Interface()
 
     def regular_start(self):
         '''Start and close the app when the database is already created'''
@@ -54,12 +53,14 @@ class LaunchApp:
         '''To close properly the app'''
         # self.db.database_closing()
 
-    def app_query(self):
-        '''Call every searching methods from Database() to find substitutes products'''
-        # self.db.category_choice()
-        # self.db.food_choice()
-        # self.db.substitutes_proposal()
-        # self.db.substitutes_saving()
+    def app_cat_query(self):
+        """Call the database to show all the available category"""
+        self.db.select_categories()
+        self.text = '====CATEGORIES===='
+        for category in self.db.select_categories():
+            text_choices = "\nchoix {} > {}".format(category.id, category.name)
+            text = text + text_choices
+        print(text)
 
     def favorites_query(self):
         '''If the user wants to take a look at his previous queries'''

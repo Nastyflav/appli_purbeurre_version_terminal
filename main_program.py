@@ -10,6 +10,7 @@ def main():
 
     api = APIRequest()
     db = Database(api)
+    launch = LaunchApp()
     db.database_connexion()
     # db.database_creation()
     db.database_selection()
@@ -18,10 +19,9 @@ def main():
     # db.products_recording(api)
     # db.select_substitutes(1)
     db.select_categories()
-    db.get_id_name_categories()
     # db.propose_categories()
 
-    # launch = LaunchApp()
+    launch.app_cat_query()
     # launch.regular_start()
 
 if __name__ == "__main__":

@@ -79,29 +79,9 @@ class Database:
 
     def select_categories(self):
         self.curs.execute(DB_CATEGORIES_SELECTION)
-        self.id_name_categories = self.curs.fetchall()
-        self.id_name_categories = self.orm.transform_categories_to_object(self.id_name_categories)
-        return self.id_name_categories
-
-        
-
-    def get_id_name_categories(self):
-        """ call database to get the data : name and id of categories """
-        # call Database method
-        text = "\nRenseignez le numéro de la catégorie choisie :\nchoix 0 > Retourner au menu"
-        for category in self.id_name_categories:
-            text_choices = "\nchoix {} > {}".format(category.id, category.name)
-            text = text + text_choices
-        print(text)
-
-    def propose_categories(self):
-        """ choice of category """
-        # creation of the text which proposes the categories list
-        text = "\nRenseignez le numéro de la catégorie choisie :\nchoix 0 > Retourner au menu"
-        for category in self.get_id_name_categories():
-            text_choices = "\nchoix {} > {}".format(category.id, category.name)
-            text = text + text_choices
-        print(text)
+        self.selected_cat = self.curs.fetchall()
+        self.selected_cat = self.orm.get_categories(self.selected_cat)
+        return self.selected_cat
 
     def select_products(self, selected_category):
         '''Pick the product using its category and then its grade'''

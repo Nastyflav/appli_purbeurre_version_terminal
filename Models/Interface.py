@@ -29,7 +29,6 @@ class Interface:
 
         return object_list
 
-
     @classmethod
     def transform_substitute_to_object(cls, sql_data):
         """ transform sql data (name and nustriscore of food chooses
@@ -45,7 +44,6 @@ class Interface:
             object_list_2.append(data2)
 
         return object_list_1, object_list_2
-
 
     @classmethod
     def transform_favorite_foods_to_object(cls, sql_data1, sql_data2):
@@ -66,7 +64,6 @@ class Interface:
             object_list_3.append(data3)
 
         return object_list_1, object_list_2, object_list_3
-
 
     @classmethod
     def transform_detail_substitute_to_object(cls, sql_data):
@@ -94,10 +91,6 @@ class Interface:
 #         print(f'Groupe Nova (traceur qualité): ')
 #         print(f'Code-barre : ')
 #         print(f'Lien : ')
-
-#     def category_choice(self):
-#         '''Method to make a first selection level by category from the DB'''
-#         print('====CATEGORIES====')
 
 #     def food_choice(self):
 #         '''Method to achieve the selection among all products from a category'''
