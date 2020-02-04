@@ -2,9 +2,7 @@
 # coding: utf-8
 
 class Categories:
-    """Category class used by 'Pur Beurre' application.
-    Data come from Open Food Facts french database.
-    """
+    """A very small class to define what it is, and to be properly used by the Interface"""
     def __init__(self, id_cat, name):
         self.id = id_cat
         self.name = name

@@ -1,7 +1,9 @@
+#! /usr/bin/env python3
+# coding: utf-8
+
+
 class Products:
-    """Product class used by the 'Pur Beurre' application.
-    Data come from Open Food Facts french database.
-    """
+    """A very small class to define what it is, and to be properly used by the Interface"""
     def __init__(self, id, name, description, category_id,
                  stores, nova_group, code, url):
         self.id = id
