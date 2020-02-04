@@ -5,6 +5,7 @@
 import mysql.connector as con
 
 from Models.APIRequest import APIRequest
+from Models.Interface import Interface
 from Settings.constants import *
 
 
@@ -14,6 +15,7 @@ class Database:
         self.db_name = 'purbeurre'
         self.filename = FILENAME
         self.api = api
+        self.orm = Interface()
         self.keys = ['product_name', 'generic_name_fr', 'stores', 'nova_groups', 'code', 'url']
         self.connexion = False # No connexion yet
         self.curs = False
@@ -77,8 +79,29 @@ class Database:
 
     def select_categories(self):
         self.curs.execute(DB_CATEGORIES_SELECTION)
-        self.selected_cat = self.curs.fetchall()
-        return self.selected_cat
+        self.id_name_categories = self.curs.fetchall()
+        self.id_name_categories = self.orm.transform_categories_to_object(self.id_name_categories)
+        return self.id_name_categories
+
+        
+
+    def get_id_name_categories(self):
+        """ call database to get the data : name and id of categories """
+        # call Database method
+        text = "\nRenseignez le numéro de la catégorie choisie :\nchoix 0 > Retourner au menu"
+        for category in self.id_name_categories:
+            text_choices = "\nchoix {} > {}".format(category.id, category.name)
+            text = text + text_choices
+        print(text)
+
+    def propose_categories(self):
+        """ choice of category """
+        # creation of the text which proposes the categories list
+        text = "\nRenseignez le numéro de la catégorie choisie :\nchoix 0 > Retourner au menu"
+        for category in self.get_id_name_categories():
+            text_choices = "\nchoix {} > {}".format(category.id, category.name)
+            text = text + text_choices
+        print(text)
 
     def select_products(self, selected_category):
         '''Pick the product using its category and then its grade'''
@@ -88,10 +111,12 @@ class Database:
 
     def select_substitutes(self, selected_category):
         '''Pick a bunch of products with higher nutritive grade'''
-        self.curs.execute(DB_FAVORITES_SELECTION.format(selected_category))
+        self.curs.execute(DB_SUBS_SELECTION.format(selected_category))
         self.selected_substitutes = self.curs.fetchall()
         return self.select_substitutes
 
     def select_favorites(self):
         '''Pick all the user's favorites'''
-        pass 
+        self.curs.execute(DB_FAVORITES_SELECTION)
+        self.selected_favs = self.curs.fetchall()
+        return self.selected_favs

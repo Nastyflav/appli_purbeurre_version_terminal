@@ -4,7 +4,6 @@
 
 from Models.APIRequest import APIRequest
 from Models.Database import Database
-from Models.Interface import Interface
 from Models.LaunchApp import LaunchApp
 
 def main():
@@ -17,8 +16,10 @@ def main():
     # db.database_check_in()
     # api.data_loading()
     # db.products_recording(api)
-    db.select_substitutes(1)
-    # db.select_categories()
+    # db.select_substitutes(1)
+    db.select_categories()
+    db.get_id_name_categories()
+    # db.propose_categories()
 
     # launch = LaunchApp()
     # launch.regular_start()
