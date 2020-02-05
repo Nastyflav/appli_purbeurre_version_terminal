@@ -3,6 +3,7 @@
 '''Manage the database in every ways, connexion, creation, insertion, error issues'''
 
 import mysql.connector as con
+from mysql.connector import errorcode
 
 from Models.APIRequest import APIRequest
 from Models.Interface import Interface
@@ -26,7 +27,10 @@ class Database:
 
     def database_selection(self):
         '''To aim the database we want to use'''
-        self.connexion.database = self.db_name
+        try :
+            self.connexion.database = self.db_name
+        except con.Error :
+            return False
 
     def database_creation(self):
         '''Create a database in the user's system using instructions in an init MySQL file'''

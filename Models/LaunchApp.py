@@ -20,8 +20,9 @@ class LaunchApp:
         self.db.database_connexion()
         if self.db.database_selection() == False:
             print('Pas de BDD')
-        if self.db.database_check_in() is None:
-            self.first_start()
+        # if self.db.database_check_in() is None:
+        #     print('Non')
+        #     self.first_start()
 
         # continue = True
         # while continue:
