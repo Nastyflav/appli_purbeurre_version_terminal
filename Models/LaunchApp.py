@@ -25,9 +25,8 @@ class LaunchApp:
         if self.db.database_check_in() is None:
             self.first_start()
 
-        # continue = True
-        # while continue:
-            # Selection menu
+        self.menu()
+        # self.app_cat_query()
                 # If category choice is choosen
                     # self.app_query()
                 # if favorites is choosen
@@ -50,6 +49,13 @@ class LaunchApp:
     def app_closing(self):
         '''To close properly the app'''
         # self.db.database_closing()
+
+    def menu(self):
+        """First interaction with the user, who has to chose 
+        between the favorites or the categories menu"""
+        print('Que souhaitez-vous faire ?\
+        \nPour consulter les catégories d\'aliments disponibles, tapez 1\
+        \nPour consulter votre aliments favoris, tapez 2')
 
     def app_cat_query(self):
         """Call the database to show all the available category"""
