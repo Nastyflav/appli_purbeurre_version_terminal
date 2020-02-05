@@ -16,7 +16,6 @@ class Database:
         self.filename = FILENAME
         self.api = api
         self.orm = Interface()
-        self.keys = ['product_name', 'generic_name_fr', 'stores', 'nova_groups', 'code', 'url']
         self.connexion = False # No connexion yet
         self.curs = False
 
@@ -78,25 +77,37 @@ class Database:
         self.connexion.close()
 
     def select_categories(self):
+        self.database_connexion()
+        self.database_selection()
         self.curs.execute(DB_CATEGORIES_SELECTION)
         self.selected_cat = self.curs.fetchall()
         self.selected_cat = self.orm.get_categories(self.selected_cat)
         return self.selected_cat
 
     def select_products(self, selected_category):
-        '''Pick the product using its category and then its grade'''
+        '''Pick the product by using its category and then its grade'''
+        self.database_connexion()
+        self.database_selection()
         self.curs.execute(DB_PRODUCTS_SELECTION.format(selected_category))
         self.selected_products = self.curs.fetchall()
+        self.selected_products = self.orm.get_products(self.selected_products)
         return self.selected_products
 
-    def select_substitutes(self, selected_category):
+    def select_substitutes(self, selected_category, selected_product, sub_infos):
         '''Pick a bunch of products with higher nutritive grade'''
-        self.curs.execute(DB_SUBS_SELECTION.format(selected_category))
-        self.selected_substitutes = self.curs.fetchall()
-        return self.select_substitutes
+        self.database_connexion()
+        self.database_selection()
+        self.curs.execute(DB_SUBS_SELECTION.format(selected_category, selected_product, sub_infos))
+        self.total_data = self.curs.fetchall()
+        self.total_data = self.orm.get_substitutes(self.total_data)
+        self.original_prod = self.total_data[0]
+        self.substitute = self.total_data[1]
+        return self.original_prod, self.substitute
 
     def select_favorites(self):
         '''Pick all the user's favorites'''
+        self.database_connexion()
+        self.database_selection()
         self.curs.execute(DB_FAVORITES_SELECTION)
         self.selected_favs = self.curs.fetchall()
         return self.selected_favs

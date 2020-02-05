@@ -18,10 +18,8 @@ def main():
     # api.data_loading()
     # db.products_recording(api)
     # db.select_substitutes(1)
-    db.select_categories()
-    # db.propose_categories()
 
-    launch.app_cat_query()
+    launch.app_sub_query()
     # launch.regular_start()
 
 if __name__ == "__main__":

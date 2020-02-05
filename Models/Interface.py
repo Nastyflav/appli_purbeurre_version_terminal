@@ -11,39 +11,33 @@ class Interface:
     '''A class to centralize the database interactions with the terminal'''
     @classmethod
     def get_categories(cls, sql_data):
-        """ transform sql data (id and name of categories) to python object """
-        object_list = []
+        """ Transform the cat datas into python objects """
+        cat_list = []
         for element in sql_data:
             data = Categories(id_cat = element[0], name = element[1])
-            object_list.append(data)
-        return object_list
+            cat_list.append(data)
+        return cat_list
 
     @classmethod
-    def transform_foods_to_object(cls, sql_data):
-        """ transform sql data (id and name of foods) to python object """
-        object_list = []
-
-        for elt in sql_data:
-            data = model.Food(foods_id=elt[0], name_food=elt[1])
-            object_list.append(data)
-
-        return object_list
+    def get_products(cls, sql_data):
+        """ Transform the product datas into python objects """
+        prod_list = []
+        for element in sql_data:
+            data = Products(id = element[0], name = element[1], nova_group = element[2])
+            prod_list.append(data)
+        return prod_list
 
     @classmethod
-    def transform_substitute_to_object(cls, sql_data):
-        """ transform sql data (name and nustriscore of food chooses
-        and the substitute information) to python object """
-        object_list_1 = []
-        object_list_2 = []
-
-        for elt in sql_data:
-            data1 = model.Food(name_food=elt[0], nutriscore=elt[1])
-            data2 = model.Food(name_food=elt[2], nutriscore=elt[3],
-                               description=elt[4], store=elt[5], link=elt[6])
-            object_list_1.append(data1)
-            object_list_2.append(data2)
-
-        return object_list_1, object_list_2
+    def get_substitutes(cls, sql_data):
+        """ Transform the the substituted one and the substitute one datas into python objects """
+        sub_list_1 = []
+        sub_list_2 = []
+        for element in sql_data:
+            data1 = Products(name=element[0], nova_group=element[1])
+            data2 = Products(name=element[2], description=element[3], stores=element[4], nova_group=element[5], url=element[6])
+            sub_list_1.append(data1)
+            sub_list_2.append(data2)
+        return sub_list_1, sub_list_2
 
     @classmethod
     def transform_favorite_foods_to_object(cls, sql_data1, sql_data2):

@@ -47,7 +47,7 @@ class LaunchApp:
         print('=====Reconstitution des stocks en cours====')
         self.db.categories_recording()
         self.db.products_recording(self.api)
-        print('====Votre magasin est désormais opérationnel !')
+        print('====Votre magasin est désormais opérationnel !====')
 
     def app_closing(self):
         '''To close properly the app'''
@@ -56,13 +56,36 @@ class LaunchApp:
     def app_cat_query(self):
         """Call the database to show all the available category"""
         self.db.select_categories()
-        self.text = '========CATEGORIES========'
+        self.text = '''========CATEGORIES========\
+        \nChoisissez un type d'aliment en tapant son numéro :'''
         for category in self.db.selected_cat:
-            self.text_choices = "\nchoix {} > {}".format(category.id, category.name)
-            self.text = self.text + self.text_choices
+            self.cat_choices = '\n{} -> {}'.format(category.name, category.id)
+            self.text = self.text + self.cat_choices
         print(self.text)
 
-    def favorites_query(self):
+    def app_prod_query(self):
+        """Call the database to show an certain amount of products regarding its category"""
+        self.db.select_products()
+        self.text = '''=======ALIMENTS=======\
+        \nChoisissez un produit à substituer en tapant son numéro :'''
+        for product in self.db.selected_products:
+            self.prod_choices = '\n{} / NOVA Groupe : {} -> {}'.format(product.name, product.nova_group, product.id)
+            self.text = self.text + self.prod_choices
+        print(self.text)    
+
+    def app_sub_query(self):
+        """Call the database to show an certain amount of substitutes regarding its grade"""
+        self.db.select_substitutes(1, 1, 13)
+        self.text = '''=======BETTER, HEALTHIER, TASTIER======='''
+        for product in self.db.original_prod:
+            self.recall = '\nVoici les substituts pour {}, Nova GROUPE : {}'.format(product.name, product.nova_group)
+        for sub in self.db.substitute:
+            self.sub_choices = '\n{}, {}, Groupe NOVA : {}, disponible chez : {}, en savoir plus : {}'\
+                                .format(product.name, product.description, product.nova_group, product.stores, product.url) 
+            self.text = self.text + self.recall + self.sub_choices
+        print(self.text)
+
+    def app_fav_query(self):
         '''If the user wants to take a look at his previous queries'''
         print('====Voici vos produits sauvegardés====')
         # self.db.favorites_from_db()

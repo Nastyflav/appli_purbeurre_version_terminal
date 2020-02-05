@@ -76,6 +76,8 @@ Consultez votre historique -> Tapez 2
 Then you can choose a category among all that the program provides :
 ```
 =======CATEGORIES=========
+Choisissez un type d'aliment en tapant son numéro :
+
 Pâtes à tartiner -> Tapez 1
 Thés -> Tapez 2
 Fromages blancs -> Tapez 3
