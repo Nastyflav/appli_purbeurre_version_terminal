@@ -56,11 +56,11 @@ class LaunchApp:
     def app_cat_query(self):
         """Call the database to show all the available category"""
         self.db.select_categories()
-        self.text = '====CATEGORIES===='
-        for category in self.db.select_categories():
-            text_choices = "\nchoix {} > {}".format(category.id, category.name)
-            text = text + text_choices
-        print(text)
+        self.text = '========CATEGORIES========'
+        for category in self.db.selected_cat:
+            self.text_choices = "\nchoix {} > {}".format(category.id, category.name)
+            self.text = self.text + self.text_choices
+        print(self.text)
 
     def favorites_query(self):
         '''If the user wants to take a look at his previous queries'''
