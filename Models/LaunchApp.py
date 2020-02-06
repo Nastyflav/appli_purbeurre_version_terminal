@@ -4,7 +4,7 @@
 from Models.APIRequest import APIRequest
 from Models.Database import Database
 from Models.Interface import Interface
-# from Controllers.KeyboardController import KeyboardController
+from Controllers.KeyboardController import KeyboardController
 from Settings.constants import *
 
 
@@ -13,10 +13,12 @@ class LaunchApp:
     def __init__(self):
         self.api = APIRequest()
         self.db = Database(self.api)
+        self.ctrl = KeyboardController()
 
     def regular_start(self):
         '''Start and close the app when the database is already created'''
         print('====PUR BEURRE, l\'application====')
+        print()
         self.db.database_connexion()
         if self.db.database_selection() == False:
             self.db.database_creation()
@@ -24,9 +26,13 @@ class LaunchApp:
         
         if self.db.database_check_in() is None:
             self.first_start()
-
+    
         self.menu()
-        # self.app_cat_query()
+        menu_choice = self.ctrl.binary_choice()
+        if menu_choice == 1 :
+            self.app_cat_query()
+        else:
+            self.app_fav_query()
                 # If category choice is choosen
                     # self.app_query()
                 # if favorites is choosen
@@ -54,8 +60,8 @@ class LaunchApp:
         """First interaction with the user, who has to chose 
         between the favorites or the categories menu"""
         print('Que souhaitez-vous faire ?\
-        \nPour consulter les catégories d\'aliments disponibles, tapez 1\
-        \nPour consulter votre aliments favoris, tapez 2')
+        \nPour consulter les catégories d\'aliments disponibles -> Tapez 1\
+        \nPour consulter vos aliments favoris -> Tapez 2')
 
     def app_cat_query(self):
         """Call the database to show all the available category"""
@@ -91,5 +97,5 @@ class LaunchApp:
 
     def app_fav_query(self):
         '''If the user wants to take a look at his previous queries'''
-        print('====Voici vos produits sauvegardés====')
+        print('=======HALL OF FAME=======')
         # self.db.favorites_from_db()

@@ -66,9 +66,9 @@ This application is working only when it's being used by the user's terminal. Yo
 
 At first, the user has to choose between two type of research :
 ```
-====MENU DE SELECTION====
-Choisissez une catégorie d'aliments -> Tapez 1
-Consultez votre historique -> Tapez 2
+Que souhaitez-vous faire ?
+Pour consulter les catégories d'aliments disponibles -> Tapez 1
+Pour consulter vos aliments favoris -> Tapez 2
 ```
 
 ## 2. Select a category
@@ -83,11 +83,12 @@ Thés -> Tapez 2
 Fromages blancs -> Tapez 3
 Jus de fruits -> Tapez 4
 Confitures -> Tapez 5
+(etc)
 ```
 
 # 3. Select a product
 
-Once the category is select, the application returns a bunch of products associated. The user just has to choose which one he wants to consult :
+Once the category is selected, the application returns a bunch of products associated. The user just has to choose which one he wants to consult :
 ```
 =======ALIMENTS=======
 Choisissez un produit à substituer en tapant son numéro :
