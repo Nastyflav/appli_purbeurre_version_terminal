@@ -6,7 +6,7 @@ quality. The program also gives you the possibility of saving all your search re
 
 # What does Pur Beurre really do ?
 ----------------
-By launching Pur Beurre the following steps will happen :
+By launching Pur Beurre the following steps will happen :\
 	- a local database with datas from [Open Food Facts](https://world.openfoodfacts.org/) will be installed \
 	- you'll be able to search in this database a certain amount of products and their substitutes \
 	- a saving function is built to allow you to save all your favorites substitutes in your database \
@@ -44,6 +44,7 @@ install pip : https://packaging.python.org/tutorials/installing-packages/
 main_program.py\
 db_init.sql creates the database in the user's system \
 Models/ contains all the different classes and the app functions\
+Controllers/ manages the user inputs into the terminal
 Settings/ contains constants.py\
 
 ## Built with :
@@ -61,6 +62,8 @@ Flavien Murail : https://github.com/Nastyflav
 ----------------
 
 This application is working only when it's being used by the user's terminal. You just need to use your keyboard to interact with the app. Pur Beurre is for now only available in french.
+All the products are ranked by their Nova Group grade, which goes from 1 (high quality) to 4. The products with the highest ranking are those less transformed by the industry, healthy and with good nutritional intakes
+More informations about the NOVA classification [here](https://fr.openfoodfacts.org/nova).
 
 ## 1. Select a research
 
@@ -93,6 +96,7 @@ Once the category is selected, the application returns a bunch of products assoc
 =======ALIMENTS=======
 Choisissez un produit à substituer en tapant son numéro :
 ```
+A selection of low-quality products is then showed, with their names and their Nova Group grades
 
 # 4. Select a substitute
 
@@ -100,6 +104,7 @@ Based on the same system than during the product selection. The user can choose 
 ```
 =======BETTER, HEALTHIER, TASTIER=======
 ```
+A selection of high-quality products is then showed, with their names and their Nova Group grades
 
 # 5. Save a substitute
 
