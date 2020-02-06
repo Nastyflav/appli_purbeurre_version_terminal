@@ -31,6 +31,10 @@ class LaunchApp:
         menu_choice = self.ctrl.binary_choice()
         if menu_choice == 1 :
             self.app_cat_query()
+            cat_nb = self.db.select_categories()
+            cat_choice = self.ctrl.cat_choice(cat_nb)
+            self.db.select_products(cat_choice)
+            self.app_prod_query()
         else:
             self.app_fav_query()
                 # If category choice is choosen
@@ -75,7 +79,6 @@ class LaunchApp:
 
     def app_prod_query(self):
         """Call the database to show an certain amount of products regarding its category"""
-        self.db.select_products()
         self.text = '''=======ALIMENTS=======\
         \nChoisissez un produit à substituer en tapant son numéro :'''
         for product in self.db.selected_products:
