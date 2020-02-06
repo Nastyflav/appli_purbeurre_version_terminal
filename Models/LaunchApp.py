@@ -35,17 +35,10 @@ class LaunchApp:
             cat_choice = self.ctrl.cat_choice(cat_nb)
             self.db.select_products(cat_choice)
             self.app_prod_query()
+            prod_nb = self.db.select_substitutes()
+            prod_choice = self.ctrl.prod_choice(prod_nb)
         else:
             self.app_fav_query()
-                # If category choice is choosen
-                    # self.app_query()
-                # if favorites is choosen
-                    # self.favorites_query()
-            # Do you still want to use the app ?
-                # If not:
-                    # self.app_closing()
-                # Else:
-                    #continue = True
 
     def first_start(self):
         '''When database is missing or first use of the app'''
@@ -88,7 +81,7 @@ class LaunchApp:
 
     def app_sub_query(self):
         """Call the database to show an certain amount of substitutes regarding its grade"""
-        self.db.select_substitutes(1, 1, 13)
+        self.db.select_substitutes(1, 15)
         self.text = '''=======BETTER, HEALTHIER, TASTIER======='''
         for product in self.db.original_prod:
             self.recall = '\nVoici les substituts pour {}, Nova GROUPE : {}'.format(product.name, product.nova_group)

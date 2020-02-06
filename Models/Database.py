@@ -97,11 +97,11 @@ class Database:
         self.selected_products = self.orm.get_products(self.selected_products)
         return self.selected_products
 
-    def select_substitutes(self, selected_category, selected_product, sub_infos):
-        '''Pick a bunch of products with higher nutritive grade'''
+    def select_substitutes(self, selected_category, selected_product):
+        '''Pick a bunch of products with higher nutritional grade'''
         self.database_connexion()
         self.database_selection()
-        self.curs.execute(DB_SUBS_SELECTION.format(selected_category, selected_product, sub_infos))
+        self.curs.execute(DB_SUBS_SELECTION.format(selected_category, selected_product))
         self.total_data = self.curs.fetchall()
         self.total_data = self.orm.get_substitutes(self.total_data)
         self.original_prod = self.total_data[0]

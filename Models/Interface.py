@@ -34,7 +34,7 @@ class Interface:
         sub_list_2 = []
         for element in sql_data:
             data1 = Products(name=element[0], nova_group=element[1])
-            data2 = Products(name=element[2], description=element[3], stores=element[4], nova_group=element[5], url=element[6])
+            data2 = Products(id=element[2], name=element[3], description=element[4], stores=element[5], nova_group=element[6], url=element[7])
             sub_list_1.append(data1)
             sub_list_2.append(data2)
         return sub_list_1, sub_list_2
@@ -43,21 +43,19 @@ class Interface:
     def transform_favorite_foods_to_object(cls, sql_data1, sql_data2):
         """ transform sql data (favorite food name
         and id, name of its substitute) to python object """
-        object_list_1 = []
-        object_list_2 = []
-        object_list_3 = []
+        fav_list_1 = []
+        fav_list_2 = []
+        fav_list_3 = []
+        for element in sql_data1:
+            data1 = Favorite(id = element[0])
+            data2 = Products(name = element[1])
+            fav_list_1.append(data1)
+            fav_list_2.append(data2)
+        for element in sql_data2:
+            data3 = Products(name = element)
+            fav_list_3.append(data3)
 
-        for elt in sql_data1:
-            data1 = model.Favorite(favorite_id=elt[0])
-            data2 = model.Food(name_food=elt[1])
-            object_list_1.append(data1)
-            object_list_2.append(data2)
-
-        for elt in sql_data2:
-            data3 = model.Food(name_food=elt)
-            object_list_3.append(data3)
-
-        return object_list_1, object_list_2, object_list_3
+        return fav_list_1, fav_list_2, fav_list_3
 
     @classmethod
     def transform_detail_substitute_to_object(cls, sql_data):
