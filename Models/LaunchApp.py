@@ -82,13 +82,16 @@ class LaunchApp:
     def app_sub_query(self):
         """Call the database to show an certain amount of substitutes regarding its grade"""
         self.db.select_substitutes(1, 15)
+        print('''=======PRODUIT SÉLECTIONNÉ=======''')
         self.text = '''=======BETTER, HEALTHIER, TASTIER======='''
-        for product in self.db.original_prod:
-            self.recall = '\nVoici les substituts pour {}, Nova GROUPE : {}'.format(product.name, product.nova_group)
-        for sub in self.db.substitute:
-            self.sub_choices = '\n{}, {}, Groupe NOVA : {}, disponible chez : {}, en savoir plus : {}'\
-                                .format(product.name, product.description, product.nova_group, product.stores, product.url) 
-            self.text = self.text + self.recall + self.sub_choices
+        for original, substitute in zip(self.db.original_prod, self.db.substitute):
+            self.recall = '\nVoici les substituts pour {}, Nova GROUPE : {}'.format(original.name, original.nova_group)
+            self.sub_choices = '\n{} -> {}, {}, Groupe NOVA : {}, disponible chez : {}, en savoir plus : {}'\
+                                .format(substitute.id, substitute.name, substitute.description, substitute.nova_group, 
+                                substitute.stores, substitute.url) 
+            self.text = self.text + self.sub_choices
+        print(self.recall)
+        print()
         print(self.text)
 
     def app_fav_query(self):

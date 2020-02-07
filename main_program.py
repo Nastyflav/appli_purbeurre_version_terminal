@@ -19,8 +19,8 @@ def main():
     # db.products_recording(api)
     # db.select_substitutes(1, 15)
 
-    # launch.app_sub_query()
-    launch.regular_start()
+    launch.app_sub_query()
+    # launch.regular_start()
 
 if __name__ == "__main__":
     main()
