@@ -102,9 +102,26 @@ A selection of low-quality products is then showed, with their names and their N
 
 Based on the same system than during the product selection. The user can choose among a list of higher quality products and print its caracteristics :
 ```
+=======PRODUIT À REMPLACER=======
+
+Voici les substituts pour Nutella, Nova GROUPE : 4
+
 =======BETTER, HEALTHIER, TASTIER=======
 ```
-A selection of high-quality products is then showed, with their names and their Nova Group grades
+A selection of high-quality products is then showed, with their names and their Nova Group grades.
+The user can select one of them to see its details :
+```
+=======SUBSTITUT SÉLECTIONNÉ=======
+Nom : Coquillettes (Maxi Format)
+
+Description : Pâtes alimentaires au blé dur de qualité supérieure
+
+Groupe Nova : 1
+
+Disponible chez : Carrefour market
+
+En savoir plus : https://fr.openfoodfacts.org/produit/3038350023001/coquillettes-maxi-format-panzani
+```
 
 # 5. Save a substitute
 
@@ -125,7 +142,7 @@ Every substitute is associated with the original product it replaces :
 ```
 
 # 7. Application ending
-Once the substitute is saved or not, or the favorites research is over, the program gives the user the choice to go back to the homepage or to quit the program.
+Once the substitute is saved or not, or the favorites research is over, the program gives the user the choice to go back to the homepage or to quit the program :
 ```
 ========RECHERCHE TERMINÉE========
 

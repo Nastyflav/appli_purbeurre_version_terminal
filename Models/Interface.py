@@ -34,10 +34,19 @@ class Interface:
         sub_list_2 = []
         for element in sql_data:
             data1 = Products(name=element[0], nova_group=element[1])
-            data2 = Products(id=element[2], name=element[3], description=element[4], nova_group=element[6])
+            data2 = Products(id=element[2], name=element[3], description=element[4], nova_group=element[5])
             sub_list_1.append(data1)
             sub_list_2.append(data2)
         return sub_list_1, sub_list_2
+
+    @classmethod
+    def show_sub_details(cls, sql_data):
+        """ Transform the product datas into python objects """
+        sub_details_list = []
+        for element in sql_data:
+            data = Products(name = element[0], description = element[1], stores = element[2], nova_group = element[3], url = element[4])
+            sub_details_list.append(data)
+        return sub_details_list
 
     @classmethod
     def transform_favorite_foods_to_object(cls, sql_data1, sql_data2):

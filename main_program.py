@@ -18,8 +18,8 @@ def main():
     # api.data_loading()
     # db.products_recording(api)
 
-    # launch.app_sub_query()
-    launch.regular_start()
+    launch.favorite_details()
+    # launch.regular_start()
 
 if __name__ == "__main__":
     main()

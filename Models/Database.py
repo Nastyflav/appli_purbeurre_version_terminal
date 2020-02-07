@@ -108,6 +108,14 @@ class Database:
         self.substitute = self.total_data[1]
         return self.original_prod, self.substitute
 
+    def show_substitut(self, selected_sub):
+        self.database_connexion()
+        self.database_selection()
+        self.curs.execute(DB_SUB_DETAILS.format(selected_sub))
+        self.selected_substitute = self.curs.fetchall()
+        self.selected_substitute = self.orm.show_sub_details(self.selected_substitute)
+        return self.selected_substitute
+
     def select_favorites(self):
         '''Pick all the user's favorites'''
         self.database_connexion()
