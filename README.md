@@ -125,4 +125,11 @@ Every substitute is associated with the original product it replaces :
 ```
 
 # 7. Application ending
+Once the substitute is saved or not, or the favorites research is over, the program gives the user the choice to go back to the homepage or to quit the program.
+```
+========RECHERCHE TERMINÉE========
 
+Que souhaitez-vous faire ?
+Pour revenir à l'accueil -> Tapez 1
+Pour quitter le programme -> Tapez 2
+```

@@ -14,6 +14,7 @@ class LaunchApp:
         self.api = APIRequest()
         self.db = Database(self.api)
         self.ctrl = KeyboardController()
+        self.running = False
 
     def regular_start(self):
         '''Start and close the app when the database is already created'''
@@ -26,19 +27,32 @@ class LaunchApp:
         
         if self.db.database_check_in() is None:
             self.first_start()
-    
-        self.menu()
-        menu_choice = self.ctrl.binary_choice()
-        if menu_choice == 1 :
-            self.app_cat_query()
-            cat_nb = self.db.select_categories()
-            cat_choice = self.ctrl.cat_choice(cat_nb)
-            self.db.select_products(cat_choice)
-            self.app_prod_query()
-            prod_nb = self.db.select_substitutes()
-            prod_choice = self.ctrl.prod_choice(prod_nb)
-        else:
-            self.app_fav_query()
+        
+        self.running = True
+        while self.running:
+            self.menu()
+            menu_choice = self.ctrl.binary_choice()
+            
+            if menu_choice == 1 :
+                self.app_cat_query()
+                cat_nb = self.db.select_categories()
+                cat_choice = self.ctrl.cat_choice(cat_nb)
+                self.db.select_products(cat_choice)
+                self.app_prod_query()
+                prod_nb = self.db.select_products(cat_choice)
+                prod_choice = self.ctrl.prod_choice(prod_nb)
+                self.db.select_substitutes(cat_choice, prod_choice)
+                self.app_sub_query()
+            
+            else:
+                self.app_fav_query()
+                self.app_closing()
+                end_choice = self.ctrl.binary_choice()
+                if end_choice == 1:
+                    self.running = True
+                else:
+                    self.db.database_closing()
+                    self.running = False
 
     def first_start(self):
         '''When database is missing or first use of the app'''
@@ -51,7 +65,11 @@ class LaunchApp:
 
     def app_closing(self):
         '''To close properly the app'''
-        # self.db.database_closing()
+        print('========RECHERCHE TERMINÉE========')
+        print()
+        print('Que souhaitez-vous faire ?\
+        \nPour revenir à l\'accueil -> Tapez 1\
+        \nPour quitter le programme -> Tapez 2')
 
     def menu(self):
         """First interaction with the user, who has to chose 
@@ -81,7 +99,6 @@ class LaunchApp:
 
     def app_sub_query(self):
         """Call the database to show an certain amount of substitutes regarding its grade"""
-        self.db.select_substitutes(1, 15)
         print('''=======PRODUIT SÉLECTIONNÉ=======''')
         self.text = '''=======BETTER, HEALTHIER, TASTIER======='''
         for original, substitute in zip(self.db.original_prod, self.db.substitute):

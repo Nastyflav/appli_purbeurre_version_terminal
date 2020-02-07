@@ -28,5 +28,8 @@ class KeyboardController:
         user_answer = input('Validez votre choix avec Entrée : ')
         if not (1 <= int(user_answer) <= len(prod_nb)):
             print('Cette option n\'existe pas, veuillez choisir entre les numéros proposés')
-            user_answer = self.prod_choice(cat_nb)
+            user_answer = self.prod_choice(prod_nb)
         return int(user_answer)
+
+    def save_choice(self):
+        pass
