@@ -17,10 +17,10 @@ def main():
     # db.database_check_in()
     # api.data_loading()
     # db.products_recording(api)
-    db.select_substitutes(1, 15)
+    # db.select_substitutes(1, 15)
 
     # launch.app_sub_query()
-    # launch.regular_start()
+    launch.regular_start()
 
 if __name__ == "__main__":
     main()

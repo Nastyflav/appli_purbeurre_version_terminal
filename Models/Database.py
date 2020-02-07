@@ -67,7 +67,7 @@ class Database:
                     link = "\'"+product['url'].replace("'", "")+"\'"
                     self.curs.execute(DB_PRODUCTS_INSERT.format(name, descr, "\'"+x+"\'", store, nova, code, link))
                 except KeyError :
-                    print('No data')
+                    print()
             self.connexion.commit()
 
     def save_favorites(self):
