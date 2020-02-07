@@ -34,7 +34,7 @@ class Interface:
         sub_list_2 = []
         for element in sql_data:
             data1 = Products(name=element[0], nova_group=element[1])
-            data2 = Products(id=element[2], name=element[3], description=element[4], stores=element[5], nova_group=element[6], url=element[7])
+            data2 = Products(id=element[2], name=element[3], description=element[4], nova_group=element[6])
             sub_list_1.append(data1)
             sub_list_2.append(data2)
         return sub_list_1, sub_list_2

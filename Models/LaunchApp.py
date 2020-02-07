@@ -103,13 +103,15 @@ class LaunchApp:
         self.text = '''=======BETTER, HEALTHIER, TASTIER======='''
         for original, substitute in zip(self.db.original_prod, self.db.substitute):
             self.recall = '\nVoici les substituts pour {}, Nova GROUPE : {}'.format(original.name, original.nova_group)
-            self.sub_choices = '\n{} -> {}, {}, Groupe NOVA : {}, disponible chez : {}, en savoir plus : {}'\
-                                .format(substitute.id, substitute.name, substitute.description, substitute.nova_group, 
-                                substitute.stores, substitute.url) 
+            self.sub_choices = '\n{}, {}, Groupe NOVA : {} ->{}'\
+                                .format(substitute.name, substitute.description, substitute.nova_group, substitute.id) 
             self.text = self.text + self.sub_choices
         print(self.recall)
         print()
         print(self.text)
+
+    def favorite_details(self):
+        """Show to the user the details of the selected substitute"""
 
     def app_fav_query(self):
         '''If the user wants to take a look at his previous queries'''
