@@ -17,7 +17,6 @@ def main():
     # db.database_check_in()
     # api.data_loading()
     # db.products_recording(api)
-
     launch.regular_start()
 
 if __name__ == "__main__":

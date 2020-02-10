@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 # coding: utf-8
+from random import sample
 
 from Models.APIRequest import APIRequest
 from Models.Database import Database
@@ -92,8 +93,11 @@ class LaunchApp:
         """Call the database to show an certain amount of products regarding its category"""
         self.text = '''=======ALIMENTS=======\
         \nChoisissez un produit à substituer en tapant son numéro :'''
-        for product in self.db.selected_products:
-            self.prod_choices = '\n{} / NOVA Groupe : {} -> {}'.format(product.name, product.nova_group, product.id)
+        self.products = sample(self.db.selected_products, 10)
+        i = 0
+        for product in self.products:
+            i += 1
+            self.prod_choices = '\n{} / NOVA Groupe : {} ->'.format(product.name, product.nova_group, product.id) + str(i)
             self.text = self.text + self.prod_choices
         print(self.text)    
 
@@ -101,7 +105,8 @@ class LaunchApp:
         """Call the database to show an certain amount of substitutes regarding its grade"""
         print('''=======PRODUIT À REMPLACER=======''')
         self.text = '''=======BETTER, HEALTHIER, TASTIER======='''
-        for original, substitute in zip(self.db.original_prod, self.db.substitute):
+        self.substitutes = sample(self.db.substitute, 10)
+        for original, substitute in zip(self.db.original_prod, self.substitutes):
             self.recall = '\nVoici les substituts pour {}, Nova GROUPE : {}'.format(original.name, original.nova_group)
             self.sub_choices = '\n{}, {}, Groupe NOVA : {} ->{}'\
                                 .format(substitute.name, substitute.description, substitute.nova_group, substitute.id) 

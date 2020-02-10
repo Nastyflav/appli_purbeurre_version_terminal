@@ -96,6 +96,7 @@ class Database:
         self.selected_products = self.curs.fetchall()
         self.selected_products = self.orm.get_products(self.selected_products)
         return self.selected_products
+        self.products = sample(self.selected_products, 15)
 
     def select_substitutes(self, selected_category, selected_product):
         '''Pick a bunch of products with higher nutritional grade'''
