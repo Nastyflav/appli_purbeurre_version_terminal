@@ -33,4 +33,11 @@ DB_SUBS_SELECTION = """SELECT (SELECT name FROM Products WHERE id = {1}),
                     WHERE category_id = {0} AND nova_group < 4 
                     ORDER BY nova_group"""
 DB_SUB_DETAILS = """SELECT name, description, stores, nova_group, barcode, url FROM Products WHERE id = {}"""
-DB_FAVORITES_SELECTION = """SELECT substitute_id, original_product_id FROM Favorites ORDER BY"""
+DB_FAVORITES_SELECTION = """SELECT Favorites.id, Products.name FROM Products
+                            JOIN Favorites ON Products.id = Favorites.substitute_id
+                            WHERE Products.id = Favorites.substitute_id
+                            ORDER BY Favorites.id"""
+DB_ORIGINAL_PRODUCTS_SELECTION = """SELECT Products.name FROM Products
+                            JOIN Favorites ON Products.id = Favorites.original_product_id
+                            WHERE Products.id = Favorites.original_product_id
+                            ORDER BY Favorites.id"""

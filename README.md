@@ -139,7 +139,12 @@ At the beginning of the application, if the user chose to consult his records, a
 Every substitute is associated with the original product it replaces :
 ```
 =======HALL OF FAME=======
+1 -> Sauce arrabbiata, comme substitut à Sauce tomate basilic
+2 -> Brocolis En fleurettes, comme substitut à Poêlée la potagère
+3 -> Tassimo - Lor café long intense, comme substitut à Nescafé 3 en 1 goût Café au Lait sucré
+4 -> Nocciolata, comme substitut à Choco nussa
 ```
+By selecting the favorite's number, the user can see more details of the substitute he previously saved.
 
 # 7. Application ending
 Once the substitute is saved or not, or the favorites research is over, the program gives the user the choice to go back to the homepage or to quit the program :

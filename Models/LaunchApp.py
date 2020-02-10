@@ -160,5 +160,10 @@ class LaunchApp:
 
     def app_fav_query(self):
         '''If the user wants to take a look at his previous queries'''
-        print('=======HALL OF FAME=======')
+        self.db.select_favorites()
+        self.text = ('=======HALL OF FAME=======')
+        for id, favorite, original in zip(self.db.id, self.db.favorite, self.db.original):
+            self.saves = '\n{} -> {}, comme substitut à {}'.format(id.id, favorite.name, original.name)
+            self.text = self.text + self.saves
+        print(self.text)
         

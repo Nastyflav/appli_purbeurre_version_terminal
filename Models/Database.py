@@ -126,4 +126,10 @@ class Database:
         self.database_selection()
         self.curs.execute(DB_FAVORITES_SELECTION)
         self.selected_favs = self.curs.fetchall()
-        return self.selected_favs
+        self.curs.execute(DB_ORIGINAL_PRODUCTS_SELECTION)
+        self.selected_original = self.curs.fetchall()
+        self.total_favorites = self.orm.get_favorites(self.selected_favs, self.selected_original)
+        self.id = self.total_favorites[0]
+        self.favorite = self.total_favorites[1]
+        self.original = self.total_favorites[2]
+        return self.id, self.favorite, self.original

@@ -37,7 +37,7 @@ class KeyboardController:
     def sub_choice(self, prod_nb):
         '''When the user choses a substitute among a list of proposal'''
         print()
-        user_answer = input('Validez votre choix avec Entrée : ')
+        user_answer = input('Consultez les détails du produit de votre choix avec Entrée : ')
         # if not (1 <= int(user_answer) <= len(prod_nb)):
         #     print('Cette option n\'existe pas, veuillez choisir entre les numéros proposés')
         #     user_answer = self.prod_choice(prod_nb)
