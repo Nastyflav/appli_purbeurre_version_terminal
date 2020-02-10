@@ -108,7 +108,7 @@ Voici les substituts pour Nutella, Nova GROUPE : 4
 
 =======BETTER, HEALTHIER, TASTIER=======
 ```
-A selection of high-quality products is then showed, with their names and their Nova Group grades.
+A random selection of high-quality products is then showed, with their names and their Nova Group grades.
 The user can select one of them to see its details :
 ```
 =======SUBSTITUT SÉLECTIONNÉ=======

@@ -49,6 +49,11 @@ class Database:
         self.curs.execute(query)
         return self.curs.fetchone()
 
+    def database_closing(self):
+        '''Closing the database'''
+        self.curs.close()
+        self.connexion.close()
+
     def products_recording(self, api):
         '''Fill the products and the categories tables with every sorted element from the API request'''
         categories = api.categories
@@ -70,17 +75,8 @@ class Database:
                     print()
             self.connexion.commit()
 
-    def save_favorites(self):
-        '''Allow the user to save his query into the database'''
-        # self.favorites_insert = DB_FAVORITES_INSERT
-        # self.fav_data =
-
-    def database_closing(self):
-        '''Closing the database'''
-        self.curs.close()
-        self.connexion.close()
-
     def select_categories(self):
+        '''Select all the existing categories in the database'''
         self.database_connexion()
         self.database_selection()
         self.curs.execute(DB_CATEGORIES_SELECTION)
@@ -96,7 +92,6 @@ class Database:
         self.selected_products = self.curs.fetchall()
         self.selected_products = self.orm.get_products(self.selected_products)
         return self.selected_products
-        self.products = sample(self.selected_products, 15)
 
     def select_substitutes(self, selected_category, selected_product):
         '''Pick a bunch of products with higher nutritional grade'''
@@ -109,13 +104,21 @@ class Database:
         self.substitute = self.total_data[1]
         return self.original_prod, self.substitute
 
-    def show_substitut(self, selected_sub):
+    def show_substitute(self, selected_sub):
+        '''Extract from the database all the datas for one selected substitute'''
         self.database_connexion()
         self.database_selection()
         self.curs.execute(DB_SUB_DETAILS.format(selected_sub))
         self.selected_substitute = self.curs.fetchall()
         self.selected_substitute = self.orm.show_sub_details(self.selected_substitute)
         return self.selected_substitute
+
+    def save_favorites(self, substitute_id, original_id):
+        '''Allow the user to save his query into the database'''
+        self.database_connexion()
+        self.database_selection()
+        self.curs.execute(DB_FAVORITES_INSERT.format(substitute_id, original_id))
+        self.connexion.commit()
 
     def select_favorites(self):
         '''Pick all the user's favorites'''
