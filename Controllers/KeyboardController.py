@@ -35,10 +35,19 @@ class KeyboardController:
         return int(user_answer)
 
     def sub_choice(self, prod_nb):
-        '''When the user choses a substitute among a list of proposal'''
+        '''When the user choses a substitute among a list of proposals'''
         print()
         user_answer = input('Consultez les détails du produit de votre choix avec Entrée : ')
         # if not (1 <= int(user_answer) <= len(prod_nb)):
         #     print('Cette option n\'existe pas, veuillez choisir entre les numéros proposés')
-        #     user_answer = self.prod_choice(prod_nb)
+        #     user_answer = self.sub_choice(prod_nb)
+        return int(user_answer)
+
+    def fav_choice(self, fav_nb):
+        '''When the user choses a favorite among a list of proposals'''
+        print()
+        user_answer = input('Consultez les détails du produit de votre choix avec Entrée : ')
+        if not (1 <= int(user_answer) <= len(fav_nb)):
+            print('Cette option n\'existe pas, veuillez choisir entre les numéros proposés')
+            user_answer = self.fav_choice(fav_nb)
         return int(user_answer)

@@ -133,3 +133,12 @@ class Database:
         self.favorite = self.total_favorites[1]
         self.original = self.total_favorites[2]
         return self.id, self.favorite, self.original
+
+    def show_favorite(self, selected_fav):
+        '''Extract from the database all the datas for one selected substitute'''
+        self.database_connexion()
+        self.database_selection()
+        self.curs.execute(DB_FAV_DETAILS.format(selected_fav))
+        self.selected_favorite = self.curs.fetchall()
+        self.selected_favorite = self.orm.show_sub_details(self.selected_favorite)
+        return self.selected_favorite

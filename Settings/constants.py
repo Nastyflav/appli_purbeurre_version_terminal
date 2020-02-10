@@ -41,3 +41,5 @@ DB_ORIGINAL_PRODUCTS_SELECTION = """SELECT Products.name FROM Products
                             JOIN Favorites ON Products.id = Favorites.original_product_id
                             WHERE Products.id = Favorites.original_product_id
                             ORDER BY Favorites.id"""
+DB_FAV_DETAILS = """SELECT name, description, stores, nova_group, barcode, url FROM Products
+                            WHERE id = (SELECT substitute_id FROM Favorites WHERE id = {})"""

@@ -48,7 +48,7 @@ class LaunchApp:
                 self.app_sub_query()
                 sub = self.ctrl.sub_choice(prod_nb)
                 self.db.show_substitute(sub)
-                self.favorite_details()
+                self.subs_details()
                 self.sub_saving()
                 save_choice = self.ctrl.binary_choice()
 
@@ -71,6 +71,10 @@ class LaunchApp:
             
             else: #Only deals with the action of consulting the saved favorites
                 self.app_fav_query()
+                fav_nb = self.db.select_favorites()
+                fav = self.ctrl.fav_choice(fav_nb)
+                self.db.show_favorite(fav)
+                self.favorite_details()
                 self.app_closing()
                 end_choice = self.ctrl.binary_choice()
                 if end_choice == 1:
@@ -137,7 +141,7 @@ class LaunchApp:
         print()
         print(self.text)
 
-    def favorite_details(self):
+    def subs_details(self):
         """Show to the user the details of the selected substitute"""
         self.text = '''=======SUBSTITUT SÉLECTIONNÉ======='''
         for product in self.db.selected_substitute:
@@ -165,5 +169,19 @@ class LaunchApp:
         for id, favorite, original in zip(self.db.id, self.db.favorite, self.db.original):
             self.saves = '\n{} -> {}, comme substitut à {}'.format(id.id, favorite.name, original.name)
             self.text = self.text + self.saves
+        print(self.text)
+
+    def favorite_details(self):
+        """Show to the user the details of the selected substitute"""
+        self.text = '''=======SUBSTITUT SÉLECTIONNÉ======='''
+        for favorite in self.db.selected_favorite:
+            self.favorite_card = """\nNom : {}
+                \nDescription : {} 
+                \nGroupe Nova : {}
+                \nDisponible chez : {}
+                \nCode-barre : {}
+                \nEn savoir plus : {}""".format(favorite.name, favorite.description, favorite.nova_group, 
+                                                favorite.stores, favorite.code, favorite.url)
+            self.text = self.text + self.favorite_card
         print(self.text)
         
