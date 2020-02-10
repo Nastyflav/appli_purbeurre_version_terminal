@@ -4,7 +4,6 @@
 from Models.Categories import Categories
 from Models.Products import Products
 from Models.Favorites import Favorites
-from Settings.constants import *
 
 
 class Interface:
@@ -30,8 +29,8 @@ class Interface:
     @classmethod
     def get_substitutes(cls, sql_data):
         """ Transform the substituted one and the substitute one datas into python objects """
-        sub_list_1 = []
-        sub_list_2 = []
+        sub_list_1 = [] #stores the substituted datas
+        sub_list_2 = [] #stores the substitute datas
         for element in sql_data:
             data1 = Products(name=element[0], nova_group=element[1])
             data2 = Products(id=element[2], name=element[3], description=element[4], nova_group=element[5])
@@ -52,9 +51,9 @@ class Interface:
     @classmethod
     def get_favorites(cls, sql_data1, sql_data2):
         """ Transform the favorites datas into python objects """
-        fav_list_1 = []
-        fav_list_2 = []
-        fav_list_3 = []
+        fav_list_1 = [] #stores the id
+        fav_list_2 = [] #stores the sub product name
+        fav_list_3 = [] #stores the original product name
         for element in sql_data1:
             data1 = Favorites(id = element[0])
             data2 = Products(name = element[1])

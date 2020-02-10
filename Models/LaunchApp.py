@@ -7,7 +7,6 @@ from Models.APIRequest import APIRequest
 from Models.Database import Database
 from Models.Interface import Interface
 from Controllers.KeyboardController import KeyboardController
-from Settings.constants import *
 
 
 class LaunchApp:
@@ -23,13 +22,13 @@ class LaunchApp:
         '''Start and close the app when the database is already created'''
         print('====PUR BEURRE, l\'application====')
         print()
-        self.db.database_connexion()
+        self.db.database_connexion() #Checking if there's a matching database
         if self.db.database_selection() == False:
-            self.db.database_creation()
+            self.db.database_creation() #If not we create it
             self.db.database_selection()
         
-        if self.db.database_check_in() is None:
-            self.first_start()
+        if self.db.database_check_in() is None: #Checking if the database is filled with products
+            self.first_start() # If not we fill it with the API datas
         
         self.running = True
         while self.running:
@@ -77,14 +76,14 @@ class LaunchApp:
                 self.favorite_details()
                 self.app_closing()
                 end_choice = self.ctrl.binary_choice()
-                if end_choice == 1:
+                if end_choice == 1: #the user goes back to the starting menu
                     self.running = True
-                else:
+                else: #disconnect the database and close the app
                     self.db.database_closing()
                     self.running = False
 
     def first_start(self):
-        '''When database is missing or first use of the app'''
+        '''When datas are missing or first use of the app'''
         print('=====Les stocks sont au plus bas !====')
         print('=====Téléchargement des données====')
         self.api.data_loading()
