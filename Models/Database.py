@@ -77,8 +77,6 @@ class Database:
 
     def select_categories(self):
         '''Select all the existing categories in the database'''
-        self.database_connexion()
-        self.database_selection()
         self.curs.execute(DB_CATEGORIES_SELECTION)
         self.selected_cat = self.curs.fetchall()
         self.selected_cat = self.orm.get_categories(self.selected_cat)
@@ -86,8 +84,6 @@ class Database:
 
     def select_products(self, selected_category):
         '''Pick the product by using its category and then its grade'''
-        self.database_connexion()
-        self.database_selection()
         self.curs.execute(DB_PRODUCTS_SELECTION.format(selected_category))
         self.selected_products = self.curs.fetchall()
         self.selected_products = self.orm.get_products(self.selected_products)
@@ -95,8 +91,6 @@ class Database:
 
     def select_substitutes(self, selected_category, selected_product):
         '''Pick a bunch of products with higher nutritional grade'''
-        self.database_connexion()
-        self.database_selection()
         self.curs.execute(DB_SUBS_SELECTION.format(selected_category, selected_product))
         self.total_data = self.curs.fetchall()
         self.total_data = self.orm.get_substitutes(self.total_data)
@@ -106,8 +100,6 @@ class Database:
 
     def show_substitute(self, selected_sub):
         '''Extract from the database all the datas for one selected substitute'''
-        self.database_connexion()
-        self.database_selection()
         self.curs.execute(DB_SUB_DETAILS.format(selected_sub))
         self.selected_substitute = self.curs.fetchall()
         self.selected_substitute = self.orm.show_sub_details(self.selected_substitute)
@@ -115,15 +107,11 @@ class Database:
 
     def save_favorites(self, substitute_id, original_id):
         '''Allow the user to save his query into the database'''
-        self.database_connexion()
-        self.database_selection()
         self.curs.execute(DB_FAVORITES_INSERT.format(substitute_id, original_id))
         self.connexion.commit()
 
     def select_favorites(self):
         '''Pick all the user's favorites'''
-        self.database_connexion()
-        self.database_selection()
         self.curs.execute(DB_FAVORITES_SELECTION)
         self.selected_favs = self.curs.fetchall()
         self.curs.execute(DB_ORIGINAL_PRODUCTS_SELECTION)
@@ -136,8 +124,6 @@ class Database:
 
     def show_favorite(self, selected_fav):
         '''Extract from the database all the datas for one selected substitute'''
-        self.database_connexion()
-        self.database_selection()
         self.curs.execute(DB_FAV_DETAILS.format(selected_fav))
         self.selected_favorite = self.curs.fetchall()
         self.selected_favorite = self.orm.show_sub_details(self.selected_favorite)
