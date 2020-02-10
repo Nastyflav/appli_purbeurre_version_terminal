@@ -44,7 +44,8 @@ class Interface:
         """ Transform the product datas into python objects """
         sub_details_list = []
         for element in sql_data:
-            data = Products(name = element[0], description = element[1], stores = element[2], nova_group = element[3], url = element[4])
+            data = Products(name = element[0], description = element[1], stores = element[2], 
+                            nova_group = element[3], code = element[4], url = element[5])
             sub_details_list.append(data)
         return sub_details_list
 

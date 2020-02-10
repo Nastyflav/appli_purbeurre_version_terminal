@@ -119,7 +119,9 @@ class LaunchApp:
                 \nDescription : {} 
                 \nGroupe Nova : {}
                 \nDisponible chez : {}
-                \nEn savoir plus : {}""".format(product.name, product.description, product.nova_group, product.stores, product.url)
+                \nCode-barre : {}
+                \nEn savoir plus : {}""".format(product.name, product.description, product.nova_group, 
+                                                product.stores, product.code, product.url)
             self.text = self.text + self.product_card
         print(self.text)
 
