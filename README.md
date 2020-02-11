@@ -100,7 +100,7 @@ A selection of low-quality products is then showed, with their names and their N
 
 # 4. Select a substitute
 
-Based on the same system than during the product selection. The user can choose among a list of higher quality products and print its caracteristics :
+Based on the same system than during the product selection. The program show to the user a higher quality product and prints its caracteristics :
 ```
 =======PRODUIT À REMPLACER=======
 
@@ -108,8 +108,8 @@ Voici les substituts pour Nutella, Nova GROUPE : 4
 
 =======BETTER, HEALTHIER, TASTIER=======
 ```
-A random selection of high-quality products is then showed, with their names and their Nova Group grades.
-The user can select one of them to see its details :
+A random high-quality product is then showed, with its name and its Nova Group grade.
+The user can select it to see its details :
 ```
 =======SUBSTITUT SÉLECTIONNÉ=======
 Nom : Coquillettes (Maxi Format)

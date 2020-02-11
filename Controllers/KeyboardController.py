@@ -20,7 +20,7 @@ class KeyboardController:
         '''When the user choses a category to explore'''
         print()
         user_answer = input('Validez votre choix avec Entrée : ')
-        if not (1 <= int(user_answer) <= len(cat_nb)):
+        if int(user_answer) not in cat_nb:
             print('Cette option n\'existe pas, veuillez choisir entre les numéros proposés')
             user_answer = self.cat_choice(cat_nb)
         return int(user_answer)
@@ -29,25 +29,25 @@ class KeyboardController:
         '''When the user choses a product to substitute'''
         print()
         user_answer = input('Validez votre choix avec Entrée : ')
-        # if not (1 <= int(user_answer) <= len(prod_nb)):
-        #     print('Cette option n\'existe pas, veuillez choisir entre les numéros proposés')
-        #     user_answer = self.prod_choice(prod_nb)
+        if int(user_answer) not in prod_nb:
+            print('Cette catégorie n\'existe pas, veuillez choisir entre les numéros proposés')
+            user_answer = self.prod_choice(prod_nb)
         return int(user_answer)
 
     def sub_choice(self, prod_nb):
         '''When the user choses a substitute among a list of proposals'''
         print()
-        user_answer = input('Consultez les détails du produit de votre choix avec Entrée : ')
-        # if not (1 <= int(user_answer) <= len(prod_nb)):
-        #     print('Cette option n\'existe pas, veuillez choisir entre les numéros proposés')
-        #     user_answer = self.sub_choice(prod_nb)
+        user_answer = input('Consultez les détails du produit en entrant son numéro suivi de Entrée : ')
+        if int(user_answer) not in prod_nb:
+            print('Cette option n\'est pas disponible, veuillez choisir entre les numéros proposés')
+            user_answer = self.sub_choice(prod_nb)
         return int(user_answer)
 
     def fav_choice(self, fav_nb):
         '''When the user choses a favorite among a list of proposals'''
         print()
         user_answer = input('Consultez les détails du produit de votre choix avec Entrée : ')
-        if not (1 <= int(user_answer) <= len(fav_nb)):
-            print('Cette option n\'existe pas, veuillez choisir entre les numéros proposés')
+        if int(user_answer) not in fav_nb:
+            print('Ce produit n\'est pas sauvegardé, veuillez choisir entre les numéros proposés')
             user_answer = self.fav_choice(fav_nb)
         return int(user_answer)

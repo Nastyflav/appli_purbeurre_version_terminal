@@ -37,28 +37,36 @@ class LaunchApp:
             
             if menu_choice == 1: #All the process from choosing a categorie to save or not a substitute into the database
                 self.app_cat_query()
-                cat_nb = self.db.select_categories()
-                cat_choice = self.ctrl.cat_choice(cat_nb)
+                cat_choice = self.ctrl.cat_choice(self.cat_id)
                 self.db.select_products(cat_choice)
                 self.app_prod_query()
-                prod_nb = self.db.select_products(cat_choice)
-                prod_choice = self.ctrl.prod_choice(prod_nb)
+                prod_choice = self.ctrl.prod_choice(self.prod_id)
                 self.db.select_substitutes(cat_choice, prod_choice)
-                self.app_sub_query()
-                sub = self.ctrl.sub_choice(prod_nb)
-                self.db.show_substitute(sub)
-                self.subs_details()
-                self.sub_saving()
-                save_choice = self.ctrl.binary_choice()
+                try :
+                    self.app_sub_query()
+                    sub = self.ctrl.sub_choice(self.sub_id)
+                    self.db.show_substitute(sub)
+                    self.subs_details()
+                    self.sub_saving()
+                    save_choice = self.ctrl.binary_choice()
+                    if save_choice == 1: #if the user choses to save his query
+                        self.db.save_favorites(sub, prod_choice)
+                        print('========ENREGISTREMENT EFFECTUÉ========')
+                        self.app_closing()
+                        end_choice = self.ctrl.binary_choice()
+                        if end_choice == 1:
+                            self.running = True
+                    else: #if the user choses to not save his query, he can end the app or start over
+                        self.app_closing()
+                        end_choice = self.ctrl.binary_choice()
+                        if end_choice == 1:
+                            self.running = True
+                        else:
+                            self.db.database_closing()
+                            self.running = False
 
-                if save_choice == 1: #if the user choses to save his query
-                    self.db.save_favorites(sub, prod_choice)
-                    print('========ENREGISTREMENT EFFECTUÉ========')
-                    self.app_closing()
-                    end_choice = self.ctrl.binary_choice()
-                    if end_choice == 1:
-                        self.running = True
-                else: #if the user choses to not save his query, he can end the app or start over
+                except ValueError :
+                    print('Désolé, il n\'existe pas de produits de meilleure qualité dans la base de données')
                     self.app_closing()
                     end_choice = self.ctrl.binary_choice()
                     if end_choice == 1:
@@ -66,12 +74,10 @@ class LaunchApp:
                     else:
                         self.db.database_closing()
                         self.running = False
-
-            
+                
             else: #Only deals with the action of consulting the saved favorites
                 self.app_fav_query()
-                fav_nb = self.db.select_favorites()
-                fav = self.ctrl.fav_choice(fav_nb)
+                fav = self.ctrl.fav_choice(self.fav_id)
                 self.db.show_favorite(fav)
                 self.favorite_details()
                 self.app_closing()
@@ -112,30 +118,36 @@ class LaunchApp:
         self.db.select_categories()
         self.text = '''========CATEGORIES========\
         \nChoisissez un type d'aliment en tapant son numéro :'''
+        self.cat_id = []
         for category in self.db.selected_cat:
-            self.cat_choices = '\n{} -> {}'.format(category.name, category.id)
+            self.cat_choices = '\n{} -> {}'.format(category.id, category.name)
             self.text = self.text + self.cat_choices
+            self.cat_id.append(category.id)
         print(self.text)
 
     def app_prod_query(self):
         """Call the database to show an certain amount of products regarding its category"""
         self.text = '''=======ALIMENTS=======\
         \nChoisissez un produit à substituer en tapant son numéro :'''
-        self.products = sample(self.db.selected_products, 10)
+        self.products = sample(self.db.selected_products, 5)
+        self.prod_id = []
         for product in self.products:
             self.prod_choices = '\n{} -> {} / NOVA Groupe : {}'.format(product.id, product.name, product.nova_group)
             self.text = self.text + self.prod_choices
+            self.prod_id.append(product.id)
         print(self.text)    
 
     def app_sub_query(self):
         """Call the database to show an certain amount of substitutes regarding its grade"""
         print('''=======PRODUIT À REMPLACER=======''')
         self.text = '''=======BETTER, HEALTHIER, TASTIER======='''
-        self.substitutes = sample(self.db.substitute, 10)
+        self.substitutes = sample(self.db.substitute, 1)
+        self.sub_id = []
         for original, substitute in zip(self.db.original_prod, self.substitutes):
-            self.recall = '\nVoici les substituts pour {}, Nova GROUPE : {}'.format(original.name, original.nova_group)
+            self.recall = '\nVoici un substitut pour {}, Nova GROUPE : {}'.format(original.name, original.nova_group)
             self.sub_choices = '\n{} -> {}, {}, Groupe NOVA : {}'.format(substitute.id, substitute.name, substitute.description, substitute.nova_group)
             self.text = self.text + self.sub_choices
+            self.sub_id.append(substitute.id)
         print(self.recall)
         print()
         print(self.text)
@@ -165,9 +177,11 @@ class LaunchApp:
         '''If the user wants to take a look at his previous queries'''
         self.db.select_favorites()
         self.text = ('=======HALL OF FAME=======')
+        self.fav_id = []
         for id, favorite, original in zip(self.db.id, self.db.favorite, self.db.original):
             self.saves = '\n{} -> {}, comme substitut à {}'.format(id.id, favorite.name, original.name)
             self.text = self.text + self.saves
+            self.fav_id.append(id.id)
         print(self.text)
 
     def favorite_details(self):
