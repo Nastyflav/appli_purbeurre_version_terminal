@@ -9,7 +9,7 @@ quality. The program also gives you the possibility of saving all your search re
 By launching Pur Beurre the following steps will happen :\
 	- a local database with datas from [Open Food Facts](https://world.openfoodfacts.org/) will be installed \
 	- you'll be able to search in this database a certain amount of products and their substitutes \
-	- a saving function is built to allow you to save all your favorites substitutes in your database \
+	- a saving function is built to allow you to save all your favorites substitutes in your database as well as the substituted foods \
 
 # How to install and launch :
 --------------
@@ -44,7 +44,7 @@ install pip : https://packaging.python.org/tutorials/installing-packages/
 main_program.py\
 db_init.sql creates the database in the user's system \
 Models/ contains all the different classes and the app functions\
-Controllers/ manages the user inputs into the terminal
+Controllers/ manages the user inputs into the terminal \
 Settings/ contains constants.py\
 
 ## Built with :
@@ -61,7 +61,7 @@ Flavien Murail : https://github.com/Nastyflav
 # How does Pur Beurre works ?
 ----------------
 
-This application is working only when it's being used by the user's terminal. You just need to use your keyboard to interact with the app. Pur Beurre is for now only available in french.
+This application is working only when it's being used by the user's terminal. You just need to use your keyboard to interact with the app. Pur Beurre is for now only available in french language.
 All the products are ranked by their Nova Group grade, which goes from 1 (high quality) to 4. The products with the highest ranking are those less transformed by the industry, healthy and with good nutritional intakes
 More informations about the NOVA classification [here](https://fr.openfoodfacts.org/nova).
 
@@ -76,7 +76,7 @@ Pour consulter vos aliments favoris -> Tapez 2
 
 ## 2. Select a category
 
-Then you can choose a category among all that the program provides :
+If the user entered 1, he can choose a category among all that the program provides :
 ```
 =======CATEGORIES=========
 Choisissez un type d'aliment en tapant son numéro :
@@ -91,7 +91,7 @@ Confitures -> Tapez 5
 
 # 3. Select a product
 
-Once the category is selected, the application returns a bunch of products associated. The user just has to choose which one he wants to consult :
+Once the category is selected, the application returns a bunch of products associated. The user just has to choose which one he wants to substitute :
 ```
 =======ALIMENTS=======
 Choisissez un produit à substituer en tapant son numéro :
@@ -139,10 +139,11 @@ At the beginning of the application, if the user chose to consult his records, a
 Every substitute is associated with the original product it replaces :
 ```
 =======HALL OF FAME=======
-1 -> Sauce arrabbiata, comme substitut à Sauce tomate basilic
-2 -> Brocolis En fleurettes, comme substitut à Poêlée la potagère
-3 -> Tassimo - Lor café long intense, comme substitut à Nescafé 3 en 1 goût Café au Lait sucré
-4 -> Nocciolata, comme substitut à Choco nussa
+1 -> Sauce arrabbiata, comme substitut à Sauce tomate basilic\
+2 -> Brocolis En fleurettes, comme substitut à Poêlée la potagère\
+3 -> Tassimo - Lor café long intense, comme substitut à Nescafé 3 en 1 goût Café au Lait sucré\
+4 -> Nocciolata, comme substitut à Choco nussa\
+(etc)
 ```
 By selecting the favorite's number, the user can see more details of the substitute he previously saved.
 
