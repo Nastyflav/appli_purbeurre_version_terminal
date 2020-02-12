@@ -9,7 +9,7 @@ quality. The program also gives you the possibility of saving all your search re
 By launching Pur Beurre the following steps will happen :\
 	- a local database with datas from [Open Food Facts](https://world.openfoodfacts.org/) will be installed \
 	- you'll be able to search in this database a certain amount of products and their substitutes \
-	- a saving function is built to allow you to save all your favorites substitutes in your database as well as the substituted foods \
+	- a saving function is built to allow you to save all your favorites substitutes in your database as well as the substituted foods
 
 # How to install and launch :
 --------------
@@ -45,7 +45,7 @@ main_program.py\
 db_init.sql creates the database in the user's system \
 Models/ contains all the different classes and the app functions\
 Controllers/ manages the user inputs into the terminal \
-Settings/ contains constants.py\
+Settings/ contains constants.py
 
 ## Built with :
 
@@ -131,7 +131,7 @@ Souhaitez vous placer ce produit dans vos favoris ?
 Oui -> Tapez 1
 Non -> Tapez 2
 ```
-If the user answers `1`, the program will record the new favorite in the local database. In any case, the user is than back to the application homepage : 
+If the user answers `1`, the program will record the new favorite in the local database. In any case, the user then has to choose to go back to the homepage or to close the app.
 
 # 6. Consult the favorites records
 
@@ -139,10 +139,10 @@ At the beginning of the application, if the user chose to consult his records, a
 Every substitute is associated with the original product it replaces :
 ```
 =======HALL OF FAME=======
-1 -> Sauce arrabbiata, comme substitut à Sauce tomate basilic\
-2 -> Brocolis En fleurettes, comme substitut à Poêlée la potagère\
-3 -> Tassimo - Lor café long intense, comme substitut à Nescafé 3 en 1 goût Café au Lait sucré\
-4 -> Nocciolata, comme substitut à Choco nussa\
+1 -> Sauce arrabbiata, comme substitut à Sauce tomate basilic
+2 -> Brocolis En fleurettes, comme substitut à Poêlée la potagère
+3 -> Tassimo - Lor café long intense, comme substitut à Nescafé 3 en 1 goût Café au Lait sucré
+4 -> Nocciolata, comme substitut à Choco nussa
 (etc)
 ```
 By selecting the favorite's number, the user can see more details of the substitute he previously saved.
