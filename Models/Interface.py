@@ -8,8 +8,7 @@ from Models.Favorites import Favorites
 
 class Interface:
     '''A class to centralize the database interactions with the terminal'''
-    @classmethod
-    def get_categories(cls, sql_data):
+    def get_categories(self, sql_data):
         """ Transform the cat datas into python objects """
         cat_list = []
         for element in sql_data:
@@ -17,8 +16,7 @@ class Interface:
             cat_list.append(data)
         return cat_list
 
-    @classmethod
-    def get_products(cls, sql_data):
+    def get_products(self, sql_data):
         """ Transform the products datas into python objects """
         prod_list = []
         for element in sql_data:
@@ -26,8 +24,7 @@ class Interface:
             prod_list.append(data)
         return prod_list
 
-    @classmethod
-    def get_substitutes(cls, sql_data):
+    def get_substitutes(self, sql_data):
         """ Transform the substituted one and the substitute one datas into python objects """
         sub_list_1 = [] #stores the substituted datas
         sub_list_2 = [] #stores the substitute datas
@@ -38,8 +35,7 @@ class Interface:
             sub_list_2.append(data2)
         return sub_list_1, sub_list_2
 
-    @classmethod
-    def show_sub_details(cls, sql_data):
+    def show_sub_details(self, sql_data):
         """ Transform the products datas into python objects, when the user wants to reveal details """
         sub_details_list = []
         for element in sql_data:
@@ -48,8 +44,7 @@ class Interface:
             sub_details_list.append(data)
         return sub_details_list
 
-    @classmethod
-    def get_favorites(cls, sql_data1, sql_data2):
+    def get_favorites(self, sql_data1, sql_data2):
         """ Transform the favorites datas into python objects """
         fav_list_1 = [] #stores the id
         fav_list_2 = [] #stores the sub product name
