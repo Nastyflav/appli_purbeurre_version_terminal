@@ -61,13 +61,16 @@ class KeyboardController:
     def fav_choice(self, fav_nb):
         '''When the user choses a favorite among a list of proposals'''
         print()
-        user_answer = input('Consultez les détails du produit de votre choix avec Entrée : ')
-        try:
-            if int(user_answer) not in fav_nb:
-                print('Ce produit n\'est pas sauvegardé, veuillez choisir entre les numéros proposés')
+        user_answer = input('Consultez les détails du produit de votre choix en tapant son numéro ou tapez O pour retourner à l\'accueil : ')
+        if int(user_answer) == 0:
+            return int(user_answer)
+        else :
+            try:
+                if int(user_answer) not in fav_nb:
+                    print('Ce produit n\'est pas sauvegardé, veuillez choisir entre les numéros proposés')
+                    user_answer = self.fav_choice(fav_nb)
+                return int(user_answer)
+            except ValueError:
+                print('Cette option n\'existe pas, veuillez choisir entre les numéros proposés')
                 user_answer = self.fav_choice(fav_nb)
-            return int(user_answer)
-        except ValueError:
-            print('Cette option n\'existe pas, veuillez choisir entre les numéros proposés')
-            user_answer = self.fav_choice(fav_nb)
-            return int(user_answer)
+                return int(user_answer)

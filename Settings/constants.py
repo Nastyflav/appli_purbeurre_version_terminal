@@ -9,7 +9,7 @@ DB_HOST = 'localhost'
 DB_USER = 'root'
 DB_PASSWORD = 'Flying14!'
 
-#API search parameters#
+#API search parameters
 
 API_PAGE_SIZE = 150
 API_PAGES_NUMBER = 1

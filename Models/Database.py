@@ -3,7 +3,6 @@
 '''Manage the database in every ways, connexion, creation, insertion, error issues'''
 
 import mysql.connector as con
-from mysql.connector import errorcode
 
 from Models.APIRequest import APIRequest
 from Models.Interface import Interface

@@ -78,15 +78,18 @@ class LaunchApp:
             else: #Only deals with the action of consulting the saved favorites
                 self.app_fav_query()
                 fav = self.ctrl.fav_choice(self.fav_id)
-                self.db.show_favorite(fav)
-                self.favorite_details()
-                self.app_closing()
-                end_choice = self.ctrl.binary_choice()
-                if end_choice == 1: #the user goes back to the starting menu
-                    self.running = True
-                else: #disconnect the database and close the app
-                    self.db.database_closing()
-                    self.running = False
+                if fav == 0:
+                    print('Dommage')
+                else:
+                    self.db.show_favorite(fav)
+                    self.favorite_details()
+                    self.app_closing()
+                    end_choice = self.ctrl.binary_choice()
+                    if end_choice == 1: #the user goes back to the starting menu
+                        self.running = True
+                    else: #disconnect the database and close the app
+                        self.db.database_closing()
+                        self.running = False
 
     def first_start(self):
         '''When datas are missing or first use of the app'''

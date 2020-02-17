@@ -3,7 +3,7 @@
 
 
 class Products:
-    """A very small class to define what it is, and to be properly used by the Interface"""
+    """A very small class to define what a product is, and to be properly used by the Interface"""
     def __init__(self, id = None, name = None, description = None, category_id = None,
                  stores = None, nova_group = None, code = None, url = None):
         self.id = id

@@ -3,7 +3,8 @@
 '''One main method to run the entire program'''
 
 from Models.LaunchApp import LaunchApp
-
+from Models.Database import Database
+from Models.APIRequest import APIRequest
 
 def main():
 
