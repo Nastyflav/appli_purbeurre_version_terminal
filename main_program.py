@@ -7,9 +7,15 @@ from Models.Database import Database
 from Models.APIRequest import APIRequest
 
 def main():
-
-    launch = LaunchApp()
-    launch.regular_start()
+    
+    api = APIRequest()
+    db = Database(api)
+    db.database_connexion()
+    db.database_selection()
+    api.data_loading()
+    db.products_recording(api)
+    # launch = LaunchApp()
+    # launch.regular_start()
 
 if __name__ == "__main__":
     main()

@@ -58,8 +58,9 @@ class Database:
         categories = api.categories
         products = api.products_list
         for x, data in zip(categories, products):
-            self.curs.execute(DB_CATEGORIES_INSERT.format("\'"+x+"\'"))
+            self.curs.executemany("""INSERT IGNORE INTO Categories (name) VALUES (%s)""", [(x,) for x in categories])
             self.connexion.commit()
+            exit(0)
 
             for product in data['products']:
                 try :
