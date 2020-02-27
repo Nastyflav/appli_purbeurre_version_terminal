@@ -58,9 +58,8 @@ class Database:
         categories = api.categories
         products = api.products_list
         for x, data in zip(categories, products):
-            self.curs.executemany("""INSERT IGNORE INTO Categories (name) VALUES (%s)""", [(x,) for x in categories])
+            self.curs.executemany(DB_CATEGORIES_INSERT, [(x,) for x in categories])
             self.connexion.commit()
-            exit(0)
 
             for product in data['products']:
                 try :
@@ -70,7 +69,7 @@ class Database:
                     nova = "\'"+product['nova_groups'].replace("'", "")+"\'"
                     code = "\'"+product['code'].replace("'", "")+"\'"
                     link = "\'"+product['url'].replace("'", "")+"\'"
-                    self.curs.execute(DB_PRODUCTS_INSERT.format(name, descr, "\'"+x+"\'", store, nova, code, link))
+                    self.curs.executemany(DB_PRODUCTS_INSERT, [(name, descr, x, store, nova, code, link) for product in data])
                 except KeyError :
                     print()
             self.connexion.commit()

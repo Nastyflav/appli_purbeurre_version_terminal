@@ -11,6 +11,7 @@ def main():
     api = APIRequest()
     db = Database(api)
     db.database_connexion()
+    db.database_creation()
     db.database_selection()
     api.data_loading()
     db.products_recording(api)
