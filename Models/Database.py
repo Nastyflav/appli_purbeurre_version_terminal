@@ -106,7 +106,7 @@ class Database:
 
     def save_favorites(self, substitute_id, original_id):
         '''Allow the user to save his query into the database'''
-        self.curs.execute(DB_FAVORITES_INSERT.format(substitute_id, original_id))
+        self.curs.execute(DB_FAVORITES_INSERT,(substitute_id, original_id))
         self.connexion.commit()
 
     def select_favorites(self):

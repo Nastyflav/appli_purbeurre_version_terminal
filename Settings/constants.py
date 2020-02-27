@@ -24,7 +24,7 @@ FILENAME = 'db_init.sql'
 DB_PRODUCTS_INSERT = """INSERT IGNORE INTO Products (name, description, category_id, stores, nova_group, barcode, url)
                         VALUES (%s, %s, (SELECT id FROM Categories WHERE name = %s), %s, %s, %s, %s)"""
 DB_CATEGORIES_INSERT = """INSERT IGNORE INTO Categories (name) VALUES (%s)"""
-DB_FAVORITES_INSERT = """INSERT IGNORE INTO Favorites (substitute_id, original_product_id) VALUES ({0}, {1})"""
+DB_FAVORITES_INSERT = """INSERT IGNORE INTO Favorites (substitute_id, original_product_id) VALUES (%s, %s)"""
 
 #Database selection parameters
 
