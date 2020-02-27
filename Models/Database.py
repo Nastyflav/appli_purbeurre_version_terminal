@@ -63,12 +63,12 @@ class Database:
 
             for product in data['products']:
                 try :
-                    name = "\'"+product['product_name'].replace("'", "")+"\'"
-                    descr = "\'"+product['generic_name_fr'].replace("'", "")+"\'"
-                    store = "\'"+product['stores'].replace("'", "")+"\'"
-                    nova = "\'"+product['nova_groups'].replace("'", "")+"\'"
-                    code = "\'"+product['code'].replace("'", "")+"\'"
-                    link = "\'"+product['url'].replace("'", "")+"\'"
+                    name = product['product_name']
+                    descr = product['generic_name_fr']
+                    store = product['stores']
+                    nova = product['nova_groups']
+                    code = product['code']
+                    link = product['url']
                     self.curs.executemany(DB_PRODUCTS_INSERT, [(name, descr, x, store, nova, code, link) for product in data])
                 except KeyError :
                     print()

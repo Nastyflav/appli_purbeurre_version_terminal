@@ -11,7 +11,7 @@ DB_PASSWORD = 'Flying14!'
 
 #API search parameters
 
-API_PAGE_SIZE = 10
+API_PAGE_SIZE = 150
 API_PAGES_NUMBER = 1
 API_CATEGORIES = ['Pâte à tartiner', 'Thés en sachet', 'Fromages blancs', 'Jus de fruits', 'Confitures de fruits',
                  'Céréales pour petit-déjeuner', 'Cafés', 'Pâtes alimentaires', 'Epices', 'Légumes surgelés',

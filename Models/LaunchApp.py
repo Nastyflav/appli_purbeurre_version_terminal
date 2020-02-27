@@ -79,7 +79,7 @@ class LaunchApp:
                 self.app_fav_query()
                 fav = self.ctrl.fav_choice(self.fav_id)
                 if fav == 0:
-                    print('Dommage')
+                    pass
                 else:
                     self.db.show_favorite(fav)
                     self.favorite_details()
