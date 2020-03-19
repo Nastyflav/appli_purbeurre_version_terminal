@@ -27,7 +27,7 @@ Write `main_program.py` in your terminal
 
 ## Dependancies :
 
-Python 3.7.x \
+Python 3.7.4 \
 download : https://www.python.org/downloads/ \
 install : https://realpython.com/installing-python/ 
 
